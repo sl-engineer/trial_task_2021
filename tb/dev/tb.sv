@@ -69,24 +69,28 @@ data_t [SLAVE_N - 1: 0] slave_rdata;
 //---------------------------------------------------------------------------------------------------------------
 // verification IPs 
 //---------------------------------------------------------------------------------------------------------------
-generate
-  for (i = 0; i < MASTER_N; i = i + 1) begin: vip_master_gen
-      tb_vip_master vip_master_gen (
-                                     // common interface
-                                     .clk          (master_clk[i]),
-                                     .aresetn      (resetn),
-
-                                     // master interface
-                                     .master_req   (master_req[i]),
-                                     .master_addr  (master_addr[i]),
-                                     .master_cmd   (master_cmd[i]),
-                                     .master_wdata (master_wdata[i]),
-                                     .master_ack   (master_ack[i]),
-                                     .master_rdata (master_rdata[i])
-                                    );
-
-  end
-endgenerate
+task automatic write (
+                       logic  [MASTER_N - 1: 0] device,
+                       addr_t                   addr,
+                       data_t                   data
+                     );
+    begin
+        @(posedge master_clk[device]);
+        
+        master_req[device]   = 1'b1;
+        master_addr[device]  = addr;
+        master_cmd[device]   = 1'b1;
+        master_wdata[device] = data;
+        
+        wait (master_ack[device]);
+        @(posedge master_clk[device]);
+        
+        master_req[device]   = 0;
+        master_addr[device]  = 0;
+        master_cmd[device]   = 0;
+        master_wdata[device] = 0;
+    end
+endtask           
 
 generate
   for (i = 0; i < SLAVE_N; i = i + 1) begin: vip_slave_gen
@@ -140,7 +144,11 @@ initial begin: main
 
   wait (!resetn);
   repeat (3) @(posedge device_clk);
-
+  
+  fork
+    write(0, 32'hdeadbeef, 32'hdeadc0de);
+    write(1, 32'hd2000004, 32'h0f0f0f0f);
+  join
   
   
   #1us;
