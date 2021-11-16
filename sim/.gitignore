@@ -1,0 +1,11 @@
+xcelium.d
+waves.shm
+.simvision
+run_xm
+src.files
+*.log
+*.diag
+*.history
+*.key
+*.err
+cov_work
