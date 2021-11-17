@@ -6,9 +6,9 @@
 
 package cross_bar_pkg;
 
-parameter MASTER_N = 2; // Number of master devices
+parameter MASTER_N = 4; // Number of master devices
 
-parameter SLAVE_N  = 2; // Number of slave devices
+parameter SLAVE_N  = 4; // Number of slave devices
 
 
 parameter ADDR_W   = 32;

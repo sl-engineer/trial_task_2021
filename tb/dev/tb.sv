@@ -6,7 +6,6 @@
 
 import cross_bar_pkg::*;
 
-`include "../tb/tb_vip_master.sv"
 `include "../tb/tb_vip_slave.sv"
 
 module tb();
@@ -25,7 +24,7 @@ logic [MASTER_N - 1: 0] master_clk;                               // master cloc
 generate
   for (i = 0; i < MASTER_N; i = i + 1) begin: vip_master_clk_gen
       initial master_clk[i] = 1'b0;
-      always #(2.75ns + i) master_clk[i] = ~master_clk[i];
+      always #(2.75ns) master_clk[i] = ~master_clk[i];
   end
 endgenerate
 
@@ -82,6 +81,9 @@ task automatic write (
         master_cmd[device]   = 1'b1;
         master_wdata[device] = data;
         
+	$display("time = %0t \tM[%0d] -> S[%0d] \trequest: Address[0x%8h] write Data[0x%8h]",
+		             $time, device, addr[ADDR_W - 1: ADDR_W - 2], addr, data);         // for 4 slaves
+	
         wait (master_ack[device]);
         @(posedge master_clk[device]);
         
@@ -89,8 +91,39 @@ task automatic write (
         master_addr[device]  = 0;
         master_cmd[device]   = 0;
         master_wdata[device] = 0;
+	
+	$display("time = %0t \tM[%0d] <- S[%0d] \tresponse: Address[0x%8h] write Data[0x%8h]",
+		             $time, device, addr[ADDR_W - 1: ADDR_W - 2], addr, data);         // for 4 slaves
     end
 endtask           
+
+task automatic read (
+                       logic  [MASTER_N - 1: 0] device,
+                       addr_t                   addr
+                     );
+    data_t data;
+    begin
+        @(posedge master_clk[device]);
+        
+        master_req[device]   = 1'b1;
+        master_addr[device]  = addr;
+        master_cmd[device]   = 1'b0;
+        
+	$display("time = %0t \tM[%0d] -> S[%0d] \trequest: Address[0x%8h] read",
+		             $time, device, addr[ADDR_W - 1: ADDR_W - 2], addr);               // for 4 slaves
+	
+        wait (master_ack[device]);
+        @(posedge master_clk[device]);
+        
+        master_req[device]   = 0;
+        master_addr[device]  = 0;
+        master_cmd[device]   = 0;
+        data                 = master_rdata[device];
+	
+	$display("time = %0t \tM[%0d] <- S[%0d] \tresponse: Address[0x%8h] read Data[0x%8h]",
+		             $time, device, addr[ADDR_W - 1: ADDR_W - 2], addr, data);         // for 4 slaves
+    end
+endtask 
 
 generate
   for (i = 0; i < SLAVE_N; i = i + 1) begin: vip_slave_gen
@@ -148,13 +181,18 @@ initial begin: main
   fork
     write(0, 32'hdeadbeef, 32'hdeadc0de);
     write(1, 32'hd2000004, 32'h0f0f0f0f);
+     read(2, 32'ha0000000);
   join
   
   
   #1us;
+  $display("\n\n\n\n");
   $display("Test passed!");
+  $display("\n\n\n\n");
   $stop;
 end  
+
+initial #10 $display("\n\n\n\n");
 
 endmodule
 
