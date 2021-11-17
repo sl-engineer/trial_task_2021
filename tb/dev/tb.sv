@@ -69,7 +69,7 @@ data_t [SLAVE_N - 1: 0] slave_rdata;
 // verification IPs 
 //---------------------------------------------------------------------------------------------------------------
 task automatic write (
-                       logic  [MASTER_N - 1: 0] device,
+                       logic  [MASTER_W - 1: 0] device,
                        addr_t                   addr,
                        data_t                   data
                      );
@@ -81,9 +81,9 @@ task automatic write (
         master_cmd[device]   = 1'b1;
         master_wdata[device] = data;
         
-	$display("time = %0t \tM[%0d] -> S[%0d] \trequest: Address[0x%8h] write Data[0x%8h]",
-		             $time, device, addr[ADDR_W - 1: ADDR_W - 2], addr, data);         // for 4 slaves
-	
+        $display("time = %0t \tM[%0d] -> S[%0d] \trequest: Address[0x%8h] write Data[0x%8h]",
+                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W], addr, data);
+    
         wait (master_ack[device]);
         @(posedge master_clk[device]);
         
@@ -91,14 +91,14 @@ task automatic write (
         master_addr[device]  = 0;
         master_cmd[device]   = 0;
         master_wdata[device] = 0;
-	
-	$display("time = %0t \tM[%0d] <- S[%0d] \tresponse: Address[0x%8h] write Data[0x%8h]",
-		             $time, device, addr[ADDR_W - 1: ADDR_W - 2], addr, data);         // for 4 slaves
+    
+        $display("time = %0t \tM[%0d] <- S[%0d] \tresponse: Address[0x%8h] write Data[0x%8h]",
+                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W], addr, data);
     end
 endtask           
 
 task automatic read (
-                       logic  [MASTER_N - 1: 0] device,
+                       logic  [MASTER_W - 1: 0] device,
                        addr_t                   addr
                      );
     data_t data;
@@ -109,9 +109,9 @@ task automatic read (
         master_addr[device]  = addr;
         master_cmd[device]   = 1'b0;
         
-	$display("time = %0t \tM[%0d] -> S[%0d] \trequest: Address[0x%8h] read",
-		             $time, device, addr[ADDR_W - 1: ADDR_W - 2], addr);               // for 4 slaves
-	
+        $display("time = %0t \tM[%0d] -> S[%0d] \trequest: Address[0x%8h] read",
+                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W], addr);
+    
         wait (master_ack[device]);
         @(posedge master_clk[device]);
         
@@ -119,9 +119,9 @@ task automatic read (
         master_addr[device]  = 0;
         master_cmd[device]   = 0;
         data                 = master_rdata[device];
-	
-	$display("time = %0t \tM[%0d] <- S[%0d] \tresponse: Address[0x%8h] read Data[0x%8h]",
-		             $time, device, addr[ADDR_W - 1: ADDR_W - 2], addr, data);         // for 4 slaves
+    
+        $display("time = %0t \tM[%0d] <- S[%0d] \tresponse: Address[0x%8h] read Data[0x%8h]",
+                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W], addr, data);
     end
 endtask 
 

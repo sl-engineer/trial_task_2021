@@ -6,6 +6,7 @@
 
 module tb_vip_slave
 #(
+    localparam SLAVE_W     = cross_bar_pkg::SLAVE_W,
     localparam ADDR_W      = cross_bar_pkg::ADDR_W,
     localparam DATA_W      = cross_bar_pkg::DATA_W,
     localparam type addr_t = cross_bar_pkg::addr_t,
@@ -43,10 +44,10 @@ always_ff @(posedge clk or negedge aresetn)
         slave_ack <= 1'b1;
     
         if (slave_cmd) $display("time = %0t \tS[%0d] \tWRITE: Address[0x%8h] Data[0x%8h]",
-                                        $time, slave_addr[ADDR_W - 1: ADDR_W - 2], slave_addr, slave_wdata); // for 4 slaves
+                                        $time, slave_addr[ADDR_W - 1: ADDR_W - SLAVE_W], slave_addr, slave_wdata); 
                  
         else           $display("time = %0t \tS[%0d] \t READ: Address[0x%8h] Data[0x%8h]",
-                                        $time, slave_addr[ADDR_W - 1: ADDR_W - 2], slave_addr, slave_rdata); // for 4 slaves
+                                        $time, slave_addr[ADDR_W - 1: ADDR_W - SLAVE_W], slave_addr, slave_rdata); 
     end else
         slave_ack <= 1'b0;
 
