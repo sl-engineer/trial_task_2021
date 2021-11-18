@@ -70,59 +70,62 @@ data_t [SLAVE_N - 1: 0] slave_rdata;
 // verification IPs 
 //---------------------------------------------------------------------------------------------------------------
 task automatic write (
-                       logic  [MASTER_W - 1: 0] device,
-                       addr_t                   addr,
-                       data_t                   data
+                       logic  [MASTER_W: 0] device,
+                       addr_t               addr,
+                       data_t               data
                      );
     begin
-        @(posedge master_clk[device]);
+        @(posedge master_clk[device - 1]);
         
-        master_req[device]   = 1'b1;
-        master_addr[device]  = addr;
-        master_cmd[device]   = 1'b1;
-        master_wdata[device] = data;
+          master_req[device - 1] = 1'b1;
+         master_addr[device - 1] = addr;
+          master_cmd[device - 1] = 1'b1;
+        master_wdata[device - 1] = data;
         
         $display("time = %0t \tM[%0d] -> S[%0d] \t request: Address[0x%8h] write Data[0x%8h]",
-                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W], addr, data);
+                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W] + 1, addr, data);
     
-        wait (master_ack[device]);
-        @(posedge master_clk[device]);
+        wait (master_ack[device - 1]);
+        @(posedge master_clk[device - 1]);
         
-        master_req[device]   = 0;
-        master_addr[device]  = 0;
-        master_cmd[device]   = 0;
-        master_wdata[device] = 0;
+          master_req[device - 1] = 0;
+         master_addr[device - 1] = 0;
+          master_cmd[device - 1] = 0;
+        master_wdata[device - 1] = 0;
     
         $display("time = %0t \tM[%0d] <- S[%0d] \tresponse: Address[0x%8h] write Data[0x%8h]",
-                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W], addr, data);
+                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W] + 1, addr, data);
     end
 endtask           
 
 task automatic read (
-                       logic  [MASTER_W - 1: 0] device,
-                       addr_t                   addr
+                       logic  [MASTER_W: 0] device,
+                       addr_t               addr
                      );
     data_t data;
     begin
-        @(posedge master_clk[device]);
+        @(posedge master_clk[device - 1]);
         
-        master_req[device]   = 1'b1;
-        master_addr[device]  = addr;
-        master_cmd[device]   = 1'b0;
+         master_req[device - 1] = 1'b1;
+        master_addr[device - 1] = addr;
+         master_cmd[device - 1] = 1'b0;
         
         $display("time = %0t \tM[%0d] -> S[%0d] \t request: Address[0x%8h] read",
-                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W], addr);
+                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W] + 1, addr);
     
-        wait (master_ack[device]);
-        @(posedge master_clk[device]);
+        wait (master_ack[device - 1]);
+        @(posedge master_clk[device - 1]);
         
-        master_req[device]   = 0;
-        master_addr[device]  = 0;
-        master_cmd[device]   = 0;
-        data                 = master_rdata[device];
+        data = master_rdata[device - 1];
+    
+        //@(posedge master_clk[device - 1]);
+    
+         master_req[device - 1] = 0;
+        master_addr[device - 1] = 0;
+         master_cmd[device - 1] = 0;      
     
         $display("time = %0t \tM[%0d] <- S[%0d] \tresponse: Address[0x%8h] read  Data[0x%8h]",
-                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W], addr, data);
+                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W] + 1, addr, data);
     end
 endtask 
 
@@ -130,15 +133,15 @@ generate
   for (i = 0; i < SLAVE_N; i = i + 1) begin: vip_slave_gen
       tb_vip_slave vip_slave_gen (
                                      // common interface
-                                     .clk         (slave_clk[i]),
-                                     .aresetn     (resetn),
+                                     .clk           (slave_clk[i]),
+                                     .aresetn       (resetn),
 
                                      // slave interface
-                                     .slave_req   (slave_req[i]),
-                                     .slave_addr  (slave_addr[i]),
-                                     .slave_cmd   (slave_cmd[i]),
+                                     .slave_req     (slave_req[i]),
+                                     .slave_addr   (slave_addr[i]),
+                                     .slave_cmd     (slave_cmd[i]),
                                      .slave_wdata (slave_wdata[i]),
-                                     .slave_ack   (slave_ack[i]),
+                                     .slave_ack     (slave_ack[i]),
                                      .slave_rdata (slave_rdata[i])
                                   );
 
@@ -175,16 +178,17 @@ cross_bar_top dut (
 // testbench body 
 //---------------------------------------------------------------------------------------------------------------
 initial begin: main
-  wait (!resetn);
+  wait (resetn);
   repeat (3) @(posedge device_clk);
   
   fork
-    write(0, 32'ha0000000, 32'hdeadc0de);
-    write(1, 32'hd2000004, 32'h0f0f0f0f);
-     read(2, 32'ha0000000);
+    write(1, 32'ha0000000, 32'hdeadc0de);
+    write(2, 32'hd2000004, 32'h0f0f0f0f);
+     read(3, 32'h00000000);
   join
   
-  read(0, 32'ha0000000);
+  #10;
+  read(1, 32'ha0000000);
   
   
   #1us;
