@@ -18,5 +18,8 @@ parameter DATA_W   = 32;
 typedef logic [ADDR_W - 1: 0] addr_t;
 typedef logic [DATA_W - 1: 0] data_t;
 
+typedef logic [MASTER_W: 0] master_num_t;
+typedef logic [SLAVE_W: 0]  slave_num_t;
+
 endpackage
 

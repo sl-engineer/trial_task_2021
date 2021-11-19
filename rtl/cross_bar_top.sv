@@ -13,8 +13,8 @@ module cross_bar_top
 )
 (
     // clk and asynchronus negative reset
-    input logic                     clk,
-    input logic                     aresetn,
+    input logic                 clk,
+    input logic                 aresetn,
 
     // master interface
     input  logic  [MASTER_N: 1] master_req,
@@ -39,55 +39,40 @@ import cross_bar_pkg::*;
 // generate variable
 genvar i;
 
-//---------------------------------------------------------------------------------------------------------------
-// Slave muxs:
-// 0 - disconnected;
-// 1 - master 1;
-// 2 - master 2;
-// ...
-//---------------------------------------------------------------------------------------------------------------
-typedef logic [MASTER_W: 0] master_num_t;
-master_num_t  [SLAVE_N: 1]  slave_mux;
-
-generate
-  for (i = 1; i < SLAVE_N + 1; i = i + 1) begin : slave_mux_gen
-      assign slave_req[i]   = (slave_mux[i]) ?   master_req[slave_mux[i]] : 0;
-      assign slave_addr[i]  = (slave_mux[i]) ?  master_addr[slave_mux[i]] : 0;
-      assign slave_cmd[i]   = (slave_mux[i]) ?   master_cmd[slave_mux[i]] : 0;
-      assign slave_wdata[i] = (slave_mux[i]) ? master_wdata[slave_mux[i]] : 0;
-  end
-endgenerate
+// mux controller interface   
+master_num_t [SLAVE_N: 1] slave_mux;
+slave_num_t [MASTER_N: 1] master_mux;
 
 //---------------------------------------------------------------------------------------------------------------
-// Master muxs:
-// 0 - disconnected;
-// 1 - slave 1;
-// 2 - slave 2;
-// ... 
+// MUX 
 //---------------------------------------------------------------------------------------------------------------
-typedef logic [SLAVE_W: 0]  slave_num_t;
-slave_num_t   [MASTER_N: 1] master_mux;
+cross_bar_mux mux (
+                    // mux controller interface
+                    .master_mux   (master_mux),
+                    .slave_mux    (slave_mux),
 
-generate
-  for (i = 1; i < MASTER_N + 1; i = i + 1) begin : master_mux_gen
-      assign master_ack[i]   = (master_mux[i]) ?   slave_ack[master_mux[i]] : 0;
-      assign master_rdata[i] = (master_mux[i]) ? slave_rdata[master_mux[i]] : 0;
-  end
-endgenerate
+                    // master interface
+                    .master_req   (master_req),
+                    .master_addr  (master_addr),
+                    .master_cmd   (master_cmd),
+                    .master_wdata (master_wdata),
+                    .master_ack   (master_ack),
+                    .master_rdata (master_rdata),
+
+                    // slave interface
+                    .slave_req    (slave_req),
+                    .slave_addr   (slave_addr),
+                    .slave_cmd    (slave_cmd),
+                    .slave_wdata  (slave_wdata),
+                    .slave_ack    (slave_ack),
+                    .slave_rdata  (slave_rdata)
+                   );
 
 //---------------------------------------------------------------------------------------------------------------
-// dummy data for test muxs
+// 
 //---------------------------------------------------------------------------------------------------------------
 
-assign slave_mux[1] = 3;
-assign slave_mux[2] = 0;
-assign slave_mux[3] = 1;
-assign slave_mux[4] = 2;
 
-assign master_mux[1] = 3;
-assign master_mux[2] = 4;
-assign master_mux[3] = 1;
-assign master_mux[4] = 0;
 
 endmodule
 
