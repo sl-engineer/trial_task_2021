@@ -28,9 +28,49 @@ logic [MASTER_N - 1: 0] grant_comb;
 logic                   nomask_req;
 logic [MASTER_N - 1: 0] nomask_grant;
 logic                   update_ptr;
+logic [MASTER_N - 1: 0] rsync1;
+logic [MASTER_N - 1: 0] rsync2;
+logic [MASTER_N - 1: 0] rsync;
+logic                   lsync1;
+logic                   lsync2;
+logic                   lsync;
+logic                   roll;
 
 // generate variable
 genvar i;
+
+//---------------------------------------------------------------------------------------------------------------
+// sync and roll logic
+//---------------------------------------------------------------------------------------------------------------
+always_ff @(posedge clk or negedge aresetn)
+  if (!aresetn)
+      rsync1 <= {MASTER_N{1'b0}};
+  else
+      rsync1 <= req;
+
+always_ff @(posedge clk or negedge aresetn)
+  if (!aresetn)
+      rsync2 <= {MASTER_N{1'b0}};
+  else
+      rsync2 <= rsync1;
+     
+assign rsync = ~rsync1 & rsync2;              // set impulse when req[x] = 1 to req[x] = 0
+
+always_ff @(posedge clk or negedge aresetn)
+  if (!aresetn)
+      lsync1 <= 1'b0;
+  else
+      lsync1 <= |req;
+      
+always_ff @(posedge clk or negedge aresetn)
+  if (!aresetn)
+      lsync2 <= 1'b0;
+  else
+      lsync2 <= lsync1;
+              
+assign lsync = lsync1 & ~lsync2;              // set impulse when |req = 0 to |req = 1
+ 
+assign roll = |rsync | lsync;
 
 //---------------------------------------------------------------------------------------------------------------
 // rotate pointer update logic
@@ -94,7 +134,7 @@ assign grant_comb[MASTER_N - 1: 0] = mask_grant[MASTER_N - 1: 0] |
 always_ff @(posedge clk or negedge aresetn)
   if (!aresetn)
       grant[MASTER_N - 1: 0] <= {MASTER_N{1'b0}};
-  else
+  else if (roll)
       grant[MASTER_N - 1: 0] <= grant_comb[MASTER_N - 1: 0] & ~grant[MASTER_N - 1: 0];
 
 

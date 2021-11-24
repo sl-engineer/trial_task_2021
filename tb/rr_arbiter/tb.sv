@@ -34,7 +34,6 @@ end
 //---------------------------------------------------------------------------------------------------------------
 logic [MASTER_N - 1: 0] req;
 logic [MASTER_N - 1: 0] grant;
-
 //---------------------------------------------------------------------------------------------------------------
 // DUT 
 //---------------------------------------------------------------------------------------------------------------
@@ -57,24 +56,26 @@ initial begin: main
   wait (resetn);
   repeat (3) @(posedge device_clk);
   
-  @(posedge device_clk);
-  req[0] = 1;
-  @(posedge device_clk);
-  req[0] = 0;
-  @(posedge device_clk);
-  req[0] = 1;
-  req[1] = 1;
-  @(posedge device_clk);
-  req[2] = 1;
-  req[1] = 0;
-  @(posedge device_clk);
-  req[3] = 1;
-  req[2] = 0;
-  @(posedge device_clk);
-  req[3] = 0;
-  @(posedge device_clk);
-  req[0] = 0;
+  fork
+    #1 req[0] = 1'b1;
+    #2 req[1] = 1'b1;
+    #3 req[2] = 1'b1;
+    #4 req[3] = 1'b1;
+  join
   
+  #30 req[0] = 1'b0;
+  
+  #37 req[1] = 1'b0;
+    
+  #42 req[2] = 1'b0;
+  #10 req[1] = 1'b1;
+  
+     
+  #30 req[3] = 1'b0;
+    
+  #45 req[1] = 1'b0;
+  #100 req[0] = 1'b1;
+  #100 req[0] = 1'b0;  
   
   #1us;
   $display("\n\n\n\n");
