@@ -38,7 +38,7 @@ always_ff @(posedge clk)
 //---------------------------------------------------------------------------------------------------------------
 // Read from mem
 //---------------------------------------------------------------------------------------------------------------
-assign slave_rdata = (slave_req && !slave_cmd) ? mem[slave_addr[7:0]] : 32'hxxxxxxxx;
+assign slave_rdata = (slave_req && !slave_cmd) ? mem[slave_addr[7:0]] : {DATA_W{1'bx}};
 
 //---------------------------------------------------------------------------------------------------------------
 // slave_ack logic and display 
@@ -51,10 +51,10 @@ always_ff @(posedge clk or negedge aresetn)
     
         
         if (slave_cmd) $display("time = %0t \tS[%0d]                      Address[0x%8h] write Data[0x%8h]",
-                                        $time, slave_addr[ADDR_W - 1: ADDR_W - SLAVE_W] + 1, slave_addr, slave_wdata); 
+                                        $time, slave_addr[ADDR_W - 1: ADDR_W - SLAVE_W], slave_addr, slave_wdata); 
                  
         else           $display("time = %0t \tS[%0d]                      Address[0x%8h] read  Data[0x%8h]",
-                                        $time, slave_addr[ADDR_W - 1: ADDR_W - SLAVE_W] + 1, slave_addr, slave_rdata); 
+                                        $time, slave_addr[ADDR_W - 1: ADDR_W - SLAVE_W], slave_addr, slave_rdata); 
     
     
     end else

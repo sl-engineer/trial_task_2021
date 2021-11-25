@@ -70,62 +70,62 @@ data_t [SLAVE_N - 1: 0] slave_rdata;
 // verification IPs 
 //---------------------------------------------------------------------------------------------------------------
 task automatic write (
-                       logic  [MASTER_W: 0] device,
-                       addr_t               addr,
-                       data_t               data
+                       logic  [MASTER_W - 1: 0] device,
+                       addr_t                   addr,
+                       data_t                   data
                      );
     begin
-        @(posedge master_clk[device - 1]);
+        @(posedge master_clk[device]);
         
-          master_req[device - 1] = 1'b1;
-         master_addr[device - 1] = addr;
-          master_cmd[device - 1] = 1'b1;
-        master_wdata[device - 1] = data;
+          master_req[device] = 1'b1;
+         master_addr[device] = addr;
+          master_cmd[device] = 1'b1;
+        master_wdata[device] = data;
         
         $display("time = %0t \tM[%0d] -> S[%0d] \t request: Address[0x%8h] write Data[0x%8h]",
-                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W] + 1, addr, data);
+                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W], addr, data);
     
-        wait (master_ack[device - 1]);
-        @(posedge master_clk[device - 1]);
+        wait (master_ack[device]);
+        @(posedge master_clk[device]);
         
-          master_req[device - 1] = 0;
-         master_addr[device - 1] = 0;
-          master_cmd[device - 1] = 0;
-        master_wdata[device - 1] = 0;
+          master_req[device] = 1'b0;
+         master_addr[device] = {ADDR_W{1'b0}};
+          master_cmd[device] = 1'b0;
+        master_wdata[device] = {DATA_W{1'b0}};
     
         $display("time = %0t \tM[%0d] <- S[%0d] \tresponse: Address[0x%8h] write Data[0x%8h]",
-                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W] + 1, addr, data);
+                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W], addr, data);
     end
 endtask           
 
 task automatic read (
-                       logic  [MASTER_W: 0] device,
-                       addr_t               addr
+                       logic  [MASTER_W - 1: 0] device,
+                       addr_t                   addr
                      );
     data_t data;
     begin
-        @(posedge master_clk[device - 1]);
+        @(posedge master_clk[device]);
         
-         master_req[device - 1] = 1'b1;
-        master_addr[device - 1] = addr;
-         master_cmd[device - 1] = 1'b0;
+         master_req[device] = 1'b1;
+        master_addr[device] = addr;
+         master_cmd[device] = 1'b0;
         
         $display("time = %0t \tM[%0d] -> S[%0d] \t request: Address[0x%8h] read",
-                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W] + 1, addr);
+                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W], addr);
     
-        wait (master_ack[device - 1]);
-        @(posedge master_clk[device - 1]);
+        wait (master_ack[device]);
+        @(posedge master_clk[device]);
         
-        data = master_rdata[device - 1];
+        data = master_rdata[device];
     
-        //@(posedge master_clk[device - 1]);
+        //@(posedge master_clk[device]);
     
-         master_req[device - 1] = 0;
-        master_addr[device - 1] = 0;
-         master_cmd[device - 1] = 0;      
+         master_req[device] = 1'b0;
+        master_addr[device] = {ADDR_W{1'b0}};
+         master_cmd[device] = 1'b0;      
     
         $display("time = %0t \tM[%0d] <- S[%0d] \tresponse: Address[0x%8h] read  Data[0x%8h]",
-                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W] + 1, addr, data);
+                             $time, device, addr[ADDR_W - 1: ADDR_W - SLAVE_W], addr, data);
     end
 endtask 
 
@@ -178,6 +178,8 @@ cross_bar_top dut (
 // testbench body 
 //---------------------------------------------------------------------------------------------------------------
 initial begin: main
+  master_req = {MASTER_N{1'b0}};
+
   wait (resetn);
   repeat (3) @(posedge device_clk);
   

@@ -13,24 +13,24 @@ module cross_bar_top
 )
 (
     // clk and asynchronus negative reset
-    input logic                 clk,
-    input logic                 aresetn,
+    input logic                     clk,
+    input logic                     aresetn,
 
     // master interface
-    input  logic  [MASTER_N: 1] master_req,
-    input  addr_t [MASTER_N: 1] master_addr,
-    input  logic  [MASTER_N: 1] master_cmd,
-    input  data_t [MASTER_N: 1] master_wdata,
-    output logic  [MASTER_N: 1] master_ack,
-    output data_t [MASTER_N: 1] master_rdata,
+    input  logic  [MASTER_N - 1: 0] master_req,
+    input  addr_t [MASTER_N - 1: 0] master_addr,
+    input  logic  [MASTER_N - 1: 0] master_cmd,
+    input  data_t [MASTER_N - 1: 0] master_wdata,
+    output logic  [MASTER_N - 1: 0] master_ack,
+    output data_t [MASTER_N - 1: 0] master_rdata,
 
     // slave interface
-    output logic  [SLAVE_N: 1] slave_req,
-    output addr_t [SLAVE_N: 1] slave_addr,
-    output logic  [SLAVE_N: 1] slave_cmd,
-    output data_t [SLAVE_N: 1] slave_wdata,
-    input  logic  [SLAVE_N: 1] slave_ack,
-    input  data_t [SLAVE_N: 1] slave_rdata
+    output logic  [SLAVE_N - 1: 0]  slave_req,
+    output addr_t [SLAVE_N - 1: 0]  slave_addr,
+    output logic  [SLAVE_N - 1: 0]  slave_cmd,
+    output data_t [SLAVE_N - 1: 0]  slave_wdata,
+    input  logic  [SLAVE_N - 1: 0]  slave_ack,
+    input  data_t [SLAVE_N - 1: 0]  slave_rdata
 
 );
 
@@ -39,40 +39,71 @@ import cross_bar_pkg::*;
 // generate variable
 genvar i;
 
-// mux controller interface   
-master_num_t [SLAVE_N: 1] slave_mux;
-slave_num_t [MASTER_N: 1] master_mux;
+//---------------------------------------------------------------------------------------------------------------
+// inner signals  
+//---------------------------------------------------------------------------------------------------------------
+msgrant_t [SLAVE_N - 1: 0] msgrant; 
+msgrant_t                  sgrant;
+
+generate
+  for (i= 0; i < SLAVE_N; i = i + 1) begin: grant_matrix_gen
+      
+  end
+endgenerate 
 
 //---------------------------------------------------------------------------------------------------------------
-// MUX 
+// masters
 //---------------------------------------------------------------------------------------------------------------
-cross_bar_mux mux (
-                    // mux controller interface
-                    .master_mux   (master_mux),
-                    .slave_mux    (slave_mux),
+generate
+  for (i= 0; i < MASTER_N; i = i + 1) begin: master_instance_gen
+      cross_bar_master mst (
+                              // master interface
+                              .master_ack   (master_ack[i]),
+                              .master_rdata (master_rdata[i]),
 
-                    // master interface
-                    .master_req   (master_req),
-                    .master_addr  (master_addr),
-                    .master_cmd   (master_cmd),
-                    .master_wdata (master_wdata),
-                    .master_ack   (master_ack),
-                    .master_rdata (master_rdata),
-
-                    // slave interface
-                    .slave_req    (slave_req),
-                    .slave_addr   (slave_addr),
-                    .slave_cmd    (slave_cmd),
-                    .slave_wdata  (slave_wdata),
-                    .slave_ack    (slave_ack),
-                    .slave_rdata  (slave_rdata)
-                   );
+                              // slave interface
+                              .slave_ack    (slave_ack),
+                              .slave_rdata  (slave_rdata),
+    
+                              // inner interface
+                              .sgrant       (sgrant[i])
+                           );
+  end
+endgenerate
 
 //---------------------------------------------------------------------------------------------------------------
-// rr_arbiter
+// slaves
 //---------------------------------------------------------------------------------------------------------------
+logic [SLAVE_N - 1: 0] saddr [SLAVE_N - 1: 0];
 
+generate
+  for (i= 0; i < SLAVE_N; i = i + 1) begin: slave_instance_gen
+      
+      assign saddr[i] = 1 << i;
+  
+      cross_bar_slave  slv (  
+                              // clk and asynchronus negative reset
+                              .clk          (clk),
+                              .aresetn      (aresetn),
+    
+                              // master interface
+                              .master_req   (master_req),
+                              .master_addr  (master_addr),
+                              .master_cmd   (master_cmd),
+                              .master_wdata (master_wdata),
+
+                              // slave interface
+                              .slave_req      (slave_req[i]),
+                              .slave_addr    (slave_addr[i]),
+                              .slave_cmd      (slave_cmd[i]),
+                              .slave_wdata  (slave_wdata[i]),
+    
+                              // inner interface
+                              .saddr          (saddr[i]), // every slave must know its number in one hot system
+                              .msgrant      (msgrant[i])
+                           );
+  end
+endgenerate
 
 
 endmodule
-
