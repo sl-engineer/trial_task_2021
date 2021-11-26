@@ -30,14 +30,14 @@ import cross_bar_pkg::*;
 // master_mux 
 //---------------------------------------------------------------------------------------------------------------
 always_comb
-  begin
-      master_ack   =         1'b0;
-      master_rdata = {DATA_W{1'b0}};
-      for (int unsigned index = 0; index < SLAVE_N; index++)
-        begin
-            master_ack   |=         sgrant[index]   &   slave_ack[index];
-            master_rdata |= {DATA_W{sgrant[index]}} & slave_rdata[index];
-        end
-  end
+begin
+    master_ack   =         1'b0;
+    master_rdata = {DATA_W{1'b0}};
+    for (int unsigned index = 0; index < SLAVE_N; index++)
+    begin
+        master_ack   |=         sgrant[index]   &   slave_ack[index];
+        master_rdata |= {DATA_W{sgrant[index]}} & slave_rdata[index];
+     end
+end
 
 endmodule

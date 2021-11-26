@@ -73,19 +73,19 @@ cross_bar_rr_arbiter arbiter (
 // slave_mux 
 //---------------------------------------------------------------------------------------------------------------
 always_comb
+begin
+  slave_req   =         1'b0;
+  slave_addr  = {ADDR_W{1'b0}};
+  slave_cmd   =         1'b0;
+  slave_wdata = {DATA_W{1'b0}};
+  for (int unsigned index = 0; index < MASTER_N; index++)
   begin
-    slave_req   =         1'b0;
-    slave_addr  = {ADDR_W{1'b0}};
-    slave_cmd   =         1'b0;
-    slave_wdata = {DATA_W{1'b0}};
-    for (int unsigned index = 0; index < MASTER_N; index++)
-    begin
-        slave_req   |=         grant[index]   &   master_req[index];
-        slave_addr  |= {ADDR_W{grant[index]}} &  master_addr[index];
-        slave_cmd   |=         grant[index]   &   master_cmd[index];
-        slave_wdata |= {DATA_W{grant[index]}} & master_wdata[index];
-    end
+      slave_req   |=         grant[index]   &   master_req[index];
+      slave_addr  |= {ADDR_W{grant[index]}} &  master_addr[index];
+      slave_cmd   |=         grant[index]   &   master_cmd[index];
+      slave_wdata |= {DATA_W{grant[index]}} & master_wdata[index];
   end
+end
 
 //---------------------------------------------------------------------------------------------------------------
 // mgrant logic 

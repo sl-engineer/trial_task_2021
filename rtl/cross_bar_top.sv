@@ -40,16 +40,19 @@ import cross_bar_pkg::*;
 genvar i;
 
 //---------------------------------------------------------------------------------------------------------------
-// inner signals  
+// inner grant matrix 
 //---------------------------------------------------------------------------------------------------------------
 msgrant_t [SLAVE_N - 1: 0] msgrant; 
 msgrant_t                  sgrant;
 
-generate
-  for (i= 0; i < SLAVE_N; i = i + 1) begin: grant_matrix_gen
-      
+always_comb
+begin
+  sgrant = 0;
+  for (int unsigned index = 0; index < SLAVE_N; index++)
+  begin
+      sgrant |= msgrant[index];
   end
-endgenerate 
+end  
 
 //---------------------------------------------------------------------------------------------------------------
 // masters
