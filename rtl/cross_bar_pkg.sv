@@ -24,5 +24,5 @@ typedef logic [DATA_W - 1: 0] data_t;
 
 typedef  logic     [SLAVE_N - 1: 0]  sgrant_t;
 typedef  sgrant_t [MASTER_N - 1: 0] msgrant_t;
-endpackage
 
+endpackage

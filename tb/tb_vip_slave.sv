@@ -43,11 +43,12 @@ assign slave_rdata = (slave_req && !slave_cmd) ? mem[slave_addr[7:0]] : {DATA_W{
 //---------------------------------------------------------------------------------------------------------------
 // slave_ack logic and display 
 //---------------------------------------------------------------------------------------------------------------
+logic ack;
 always_ff @(posedge clk or negedge aresetn)
     if (!aresetn)
-        slave_ack <= 1'b0;
+        ack <= 1'b0;
     else if (slave_req) begin
-        slave_ack <= 1'b1;
+        ack <= 1'b1;
     
         
         if (slave_cmd) $display("time = %0t \tS[%0d]                      Address[0x%8h] write Data[0x%8h]",
@@ -58,7 +59,9 @@ always_ff @(posedge clk or negedge aresetn)
     
     
     end else
-        slave_ack <= 1'b0;
+        ack <= 1'b0;
 
+
+assign slave_ack = ack & slave_req;
 
 endmodule

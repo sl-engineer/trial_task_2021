@@ -36,9 +36,6 @@ module cross_bar_top
 
 import cross_bar_pkg::*;
 
-// generate variable
-genvar i;
-
 //---------------------------------------------------------------------------------------------------------------
 // inner grant matrix 
 //---------------------------------------------------------------------------------------------------------------
@@ -47,18 +44,18 @@ msgrant_t                  sgrant;
 
 always_comb
 begin
-  sgrant = 0;
-  for (int unsigned index = 0; index < SLAVE_N; index++)
-  begin
-      sgrant |= msgrant[index];
-  end
+    sgrant = 0;
+    for (int unsigned index = 0; index < SLAVE_N; index++)
+    begin
+        sgrant |= msgrant[index];
+    end
 end  
 
 //---------------------------------------------------------------------------------------------------------------
 // masters
 //---------------------------------------------------------------------------------------------------------------
 generate
-  for (i= 0; i < MASTER_N; i = i + 1) begin: master_instance_gen
+  for (genvar i = 0; i < MASTER_N; i = i + 1) begin: master_instance_gen
       cross_bar_master mst (
                               // master interface
                               .master_ack   (master_ack[i]),
@@ -80,7 +77,7 @@ endgenerate
 logic [SLAVE_N - 1: 0] saddr [SLAVE_N - 1: 0];
 
 generate
-  for (i= 0; i < SLAVE_N; i = i + 1) begin: slave_instance_gen
+  for (genvar i = 0; i < SLAVE_N; i = i + 1) begin: slave_instance_gen
       
       assign saddr[i] = 1 << i;
   

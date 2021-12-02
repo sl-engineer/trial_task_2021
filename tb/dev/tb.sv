@@ -87,6 +87,7 @@ task automatic write (
     
         wait (master_ack[device]);
         @(posedge master_clk[device]);
+    @(posedge master_clk[device]);
         
           master_req[device] = 1'b0;
          master_addr[device] = {ADDR_W{1'b0}};
@@ -118,7 +119,7 @@ task automatic read (
         
         data = master_rdata[device];
     
-        //@(posedge master_clk[device]);
+        @(posedge master_clk[device]);
     
          master_req[device] = 1'b0;
         master_addr[device] = {ADDR_W{1'b0}};
@@ -192,6 +193,22 @@ initial begin: main
   #10;
   read(1, 32'ha0000000);
   
+  $display("\n");
+  #100;
+  
+  fork
+    write(0, 32'h00000000, 32'h01234567);
+    write(1, 32'h00000004, 32'h89abcdef);
+    write(2, 32'h00000008, 32'h00ff00ff);
+    write(3, 32'h0000000c, 32'h5a5a5a5a);
+  join
+  $display("\n");
+  fork
+     #10 read(0, 32'h0000000c);
+     #10 read(1, 32'h00000008);
+     #10 read(2, 32'h00000004);
+     #30 read(3, 32'h00000000);
+  join   
   
   #1us;
   $display("\n\n\n\n");

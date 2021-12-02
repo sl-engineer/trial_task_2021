@@ -6,7 +6,7 @@
 
 module cross_bar_rr_arbiter
 #(
-    localparam MASTER_N    = cross_bar_pkg::MASTER_N // must be at least 2
+    localparam MASTER_N = cross_bar_pkg::MASTER_N // must be at least 2
 )
 (
     // clk and asynchronus negative reset
@@ -21,6 +21,9 @@ module cross_bar_rr_arbiter
 
 import cross_bar_pkg::*;
 
+//---------------------------------------------------------------------------------------------------------------
+// inner signals
+//---------------------------------------------------------------------------------------------------------------
 logic [MASTER_N - 1: 0] rotate_ptr;
 logic [MASTER_N - 1: 0] mask_req;
 logic [MASTER_N - 1: 0] mask_grant;
@@ -28,48 +31,45 @@ logic [MASTER_N - 1: 0] grant_comb;
 logic                   nomask_req;
 logic [MASTER_N - 1: 0] nomask_grant;
 logic                   update_ptr;
-logic [MASTER_N - 1: 0] rsync1;
-logic [MASTER_N - 1: 0] rsync2;
-logic [MASTER_N - 1: 0] rsync;
-logic                   lsync1;
-logic                   lsync2;
-logic                   lsync;
-logic                   roll;
-
-// generate variable
-genvar i;
 
 //---------------------------------------------------------------------------------------------------------------
 // sync and roll logic
 //---------------------------------------------------------------------------------------------------------------
+logic [MASTER_N - 1: 0] rsync1;
 always_ff @(posedge clk or negedge aresetn)
   if (!aresetn)
       rsync1 <= {MASTER_N{1'b0}};
   else
       rsync1 <= req;
 
+logic [MASTER_N - 1: 0] rsync2;
 always_ff @(posedge clk or negedge aresetn)
   if (!aresetn)
       rsync2 <= {MASTER_N{1'b0}};
   else
       rsync2 <= rsync1;
-     
-assign rsync = ~rsync1 & rsync2;              // set impulse when req[x] = 1 to req[x] = 0
 
+logic [MASTER_N - 1: 0] rsync;     
+assign rsync = ~rsync1 & rsync2;              // set impulse when req[x] = 1 => to req[x] = 0
+
+logic lsync1;
 always_ff @(posedge clk or negedge aresetn)
   if (!aresetn)
       lsync1 <= 1'b0;
   else
       lsync1 <= |req;
-      
+
+logic lsync2;      
 always_ff @(posedge clk or negedge aresetn)
   if (!aresetn)
       lsync2 <= 1'b0;
   else
       lsync2 <= lsync1;
-              
-assign lsync = lsync1 & ~lsync2;              // set impulse when |req = 0 to |req = 1
- 
+
+logic  lsync;              
+assign lsync = lsync1 & ~lsync2;              // set impulse when |req = 0 -> to |req = 1
+
+logic  roll; 
 assign roll = |rsync | lsync;
 
 //---------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ always_ff @(posedge clk or negedge aresetn)
   end
 
 generate
-  for (i = 2; i < MASTER_N; i = i + 1) begin: rotate_ptr_gen
+  for (genvar i = 2; i < MASTER_N; i = i + 1) begin: rotate_ptr_gen
       always_ff @(posedge clk or negedge aresetn)
         if (!aresetn)
             rotate_ptr[i] <= 1'b1;
@@ -107,7 +107,7 @@ assign mask_req[MASTER_N - 1: 0] = req[MASTER_N - 1: 0] & rotate_ptr[MASTER_N - 
 assign mask_grant[0] = mask_req[0];
 
 generate
-  for (i = 1; i < MASTER_N; i = i + 1) begin: mask_grant_gen
+  for (genvar i = 1; i < MASTER_N; i = i + 1) begin: mask_grant_gen
       assign mask_grant[i] = (~(|mask_req[i - 1: 0])) & mask_req[i];
   end
 endgenerate
@@ -118,7 +118,7 @@ endgenerate
 assign nomask_grant[0] = req[0];
 
 generate
-  for (i = 1; i < MASTER_N; i = i + 1) begin: nomask_grant_gen
+  for (genvar i = 1; i < MASTER_N; i = i + 1) begin: nomask_grant_gen
       assign nomask_grant[i] = (~(|req[i - 1: 0])) & req[i];
   end
 endgenerate

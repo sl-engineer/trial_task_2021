@@ -1,4 +1,4 @@
-# SimVision Command Script (Thu Nov 18 09:08:00 MSK 2021)
+# SimVision Command Script (Thu Dec 02 11:05:43 MSK 2021)
 #
 # Version 17.10.s009
 #
@@ -129,126 +129,152 @@ set dbNames(realName1) [database require waves -hints {
 #
 # Groups
 #
+catch {group new -name {Master 0} -overlay 0}
 catch {group new -name {Master 1} -overlay 0}
 catch {group new -name {Master 2} -overlay 0}
 catch {group new -name {Master 3} -overlay 0}
-catch {group new -name {Master 4} -overlay 0}
+catch {group new -name {Slave 0} -overlay 0}
 catch {group new -name {Slave 1} -overlay 0}
 catch {group new -name {Slave 2} -overlay 0}
 catch {group new -name {Slave 3} -overlay 0}
-catch {group new -name {Slave 4} -overlay 0}
-group using {Master 1}
+catch {group new -name {Device Slave 0 req} -overlay 0}
+catch {group new -name {Device Slave 0 grant} -overlay 0}
+catch {group new -name {vip Slave 0} -overlay 0}
+group using {Master 0}
 group set -overlay 0
 group set -comment {}
 group clear 0 end
 
 group insert \
     [subst  {$dbNames(realName1)::[format {tb.master_clk[0]}]} ] \
-    [subst  {$dbNames(realName1)::[format {tb.resetn}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_req[0]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_cmd[0]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_addr[0]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_wdata[0]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_ack[0]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_rdata[0]}]} ]
-group using {Master 2}
+group using {Master 1}
 group set -overlay 0
 group set -comment {}
 group clear 0 end
 
 group insert \
     [subst  {$dbNames(realName1)::[format {tb.master_clk[1]}]} ] \
-    [subst  {$dbNames(realName1)::[format {tb.resetn}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_req[1]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_cmd[1]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_addr[1]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_wdata[1]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_ack[1]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_rdata[1]}]} ]
-group using {Master 3}
+group using {Master 2}
 group set -overlay 0
 group set -comment {}
 group clear 0 end
 
 group insert \
     [subst  {$dbNames(realName1)::[format {tb.master_clk[2]}]} ] \
-    [subst  {$dbNames(realName1)::[format {tb.resetn}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_req[2]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_cmd[2]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_addr[2]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_wdata[2]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_ack[2]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_rdata[2]}]} ]
-group using {Master 4}
+group using {Master 3}
 group set -overlay 0
 group set -comment {}
 group clear 0 end
 
 group insert \
     [subst  {$dbNames(realName1)::[format {tb.master_clk[3]}]} ] \
-    [subst  {$dbNames(realName1)::[format {tb.resetn}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_req[3]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_cmd[3]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_addr[3]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_wdata[3]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_ack[3]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.master_rdata[3]}]} ]
-group using {Slave 1}
+group using {Slave 0}
 group set -overlay 0
 group set -comment {}
 group clear 0 end
 
 group insert \
     [subst  {$dbNames(realName1)::[format {tb.slave_clk[0]}]} ] \
-    [subst  {$dbNames(realName1)::[format {tb.resetn}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_req[0]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_cmd[0]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_addr[0]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_wdata[0]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_ack[0]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_rdata[0]}]} ]
-group using {Slave 2}
+group using {Slave 1}
 group set -overlay 0
 group set -comment {}
 group clear 0 end
 
 group insert \
     [subst  {$dbNames(realName1)::[format {tb.slave_clk[1]}]} ] \
-    [subst  {$dbNames(realName1)::[format {tb.resetn}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_req[1]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_cmd[1]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_addr[1]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_wdata[1]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_ack[1]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_rdata[1]}]} ]
-group using {Slave 3}
+group using {Slave 2}
 group set -overlay 0
 group set -comment {}
 group clear 0 end
 
 group insert \
     [subst  {$dbNames(realName1)::[format {tb.slave_clk[2]}]} ] \
-    [subst  {$dbNames(realName1)::[format {tb.resetn}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_req[2]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_cmd[2]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_addr[2]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_wdata[2]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_ack[2]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_rdata[2]}]} ]
-group using {Slave 4}
+group using {Slave 3}
 group set -overlay 0
 group set -comment {}
 group clear 0 end
 
 group insert \
     [subst  {$dbNames(realName1)::[format {tb.slave_clk[3]}]} ] \
-    [subst  {$dbNames(realName1)::[format {tb.resetn}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_req[3]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_cmd[3]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_addr[3]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_wdata[3]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_ack[3]}]} ] \
     [subst  {$dbNames(realName1)::[format {tb.slave_rdata[3]}]} ]
+group using {Device Slave 0 req}
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group insert \
+    [subst  {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.req[0]}]} ] \
+    [subst  {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.req[1]}]} ] \
+    [subst  {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.req[2]}]} ] \
+    [subst  {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.req[3]}]} ]
+group using {Device Slave 0 grant}
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group insert \
+    [subst  {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.grant[0]}]} ] \
+    [subst  {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.grant[1]}]} ] \
+    [subst  {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.grant[2]}]} ] \
+    [subst  {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.grant[3]}]} ] \
+    {vip Slave 0}
+group using {vip Slave 0}
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+
+group insert \
+    [subst  {$dbNames(realName1)::[format {tb.vip_slave_gen[0].vip_slave_gen.clk}]} ] \
+    [subst  {$dbNames(realName1)::[format {tb.vip_slave_gen[0].vip_slave_gen.slave_req}]} ] \
+    [subst  {$dbNames(realName1)::[format {tb.vip_slave_gen[0].vip_slave_gen.slave_ack}]} ] \
+    [subst  {$dbNames(realName1)::[format {tb.vip_slave_gen[0].vip_slave_gen.ack}]} ]
 
 #
 # Mnemonic Maps
@@ -263,8 +289,8 @@ mmap new -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor ora
 #
 # Design Browser windows
 #
-if {[catch {window new WatchList -name "Design Browser 1" -geometry 730x500+261+33}] != ""} {
-    window geometry "Design Browser 1" 730x500+261+33
+if {[catch {window new WatchList -name "Design Browser 1" -geometry 806x858+261+33}] != ""} {
+    window geometry "Design Browser 1" 806x858+261+33
 }
 window target "Design Browser 1" on
 browser using {Design Browser 1}
@@ -292,16 +318,14 @@ waveform set \
 waveform baseline set -time 0
 
 
+set groupId0 [waveform add -groups {{Master 0}}]
+
+
 set groupId0 [waveform add -groups {{Master 1}}]
-
-
-set groupId0 [waveform add -groups {{Master 2}}]
-waveform format $groupId0 -namecolor #00ffff
 set gpGlist0 [waveform hierarchy contents $groupId0]
 set gpID0 [lindex $gpGlist0 0]
 foreach {name attrs} [subst  {
     {$dbNames(realName1)::[format {tb.master_clk[1]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.resetn}]} {-color #00ffff -namecolor #00ffff}
     {$dbNames(realName1)::[format {tb.master_req[1]}]} {-color #00ffff -namecolor #00ffff}
     {$dbNames(realName1)::[format {tb.master_cmd[1]}]} {-color #00ffff -namecolor #00ffff}
     {$dbNames(realName1)::[format {tb.master_addr[1]}]} {-color #00ffff -namecolor #00ffff}
@@ -316,7 +340,6 @@ foreach {name attrs} [subst  {
     {}
     {}
     {}
-    {}
 } {
     set expected [ join [waveform signals -format fullpath $gpID0] ]
     if {[string equal $name $expected] || $name == "cdivider"} {
@@ -330,26 +353,19 @@ foreach {name attrs} [subst  {
     set gpGlist0 [lrange $gpGlist0 1 end]
     set gpID0 [lindex $gpGlist0 0]
 }
-waveform hierarchy collapse $groupId0
 
 
-set groupId0 [waveform add -groups {{Master 3}}]
-waveform hierarchy collapse $groupId0
-
-
-set groupId0 [waveform add -groups {{Master 4}}]
-waveform format $groupId0 -namecolor #00ffff
+set groupId0 [waveform add -groups {{Master 2}}]
 set gpGlist0 [waveform hierarchy contents $groupId0]
 set gpID0 [lindex $gpGlist0 0]
 foreach {name attrs} [subst  {
-    {$dbNames(realName1)::[format {tb.master_clk[3]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.resetn}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.master_req[3]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.master_cmd[3]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.master_addr[3]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.master_wdata[3]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.master_ack[3]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.master_rdata[3]}]} {-color #00ffff -namecolor #00ffff}
+    {$dbNames(realName1)::[format {tb.master_clk[2]}]} {-color #ffff00 -namecolor #ffff00}
+    {$dbNames(realName1)::[format {tb.master_req[2]}]} {-color #ffff00 -namecolor #ffff00}
+    {$dbNames(realName1)::[format {tb.master_cmd[2]}]} {-color #ffff00 -namecolor #ffff00}
+    {$dbNames(realName1)::[format {tb.master_addr[2]}]} {-color #ffff00 -namecolor #ffff00}
+    {$dbNames(realName1)::[format {tb.master_wdata[2]}]} {-color #ffff00 -namecolor #ffff00}
+    {$dbNames(realName1)::[format {tb.master_ack[2]}]} {-color #ffff00 -namecolor #ffff00}
+    {$dbNames(realName1)::[format {tb.master_rdata[2]}]} {-color #ffff00 -namecolor #ffff00}
 }] childcmds {
     {}
     {}
@@ -358,6 +374,39 @@ foreach {name attrs} [subst  {
     {}
     {}
     {}
+} {
+    set expected [ join [waveform signals -format fullpath $gpID0] ]
+    if {[string equal $name $expected] || $name == "cdivider"} {
+        if {$attrs != ""} {
+            eval waveform format $gpID0 $attrs
+        }
+        if { $childcmds != ""} {
+            eval $childcmds
+        }
+    }
+    set gpGlist0 [lrange $gpGlist0 1 end]
+    set gpID0 [lindex $gpGlist0 0]
+}
+
+
+set groupId0 [waveform add -groups {{Master 3}}]
+set gpGlist0 [waveform hierarchy contents $groupId0]
+set gpID0 [lindex $gpGlist0 0]
+foreach {name attrs} [subst  {
+    {$dbNames(realName1)::[format {tb.master_clk[3]}]} {-color #ffffff -namecolor #ffffff}
+    {$dbNames(realName1)::[format {tb.master_req[3]}]} {-color #ffffff -namecolor #ffffff}
+    {$dbNames(realName1)::[format {tb.master_cmd[3]}]} {-color #ffffff -namecolor #ffffff}
+    {$dbNames(realName1)::[format {tb.master_addr[3]}]} {-color #ffffff -namecolor #ffffff}
+    {$dbNames(realName1)::[format {tb.master_wdata[3]}]} {-color #ffffff -namecolor #ffffff}
+    {$dbNames(realName1)::[format {tb.master_ack[3]}]} {-color #ffffff -namecolor #ffffff}
+    {$dbNames(realName1)::[format {tb.master_rdata[3]}]} {-color #ffffff -namecolor #ffffff}
+}] childcmds {
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
     {}
 } {
     set expected [ join [waveform signals -format fullpath $gpID0] ]
@@ -372,19 +421,16 @@ foreach {name attrs} [subst  {
     set gpGlist0 [lrange $gpGlist0 1 end]
     set gpID0 [lindex $gpGlist0 0]
 }
-waveform hierarchy collapse $groupId0
+
+
+set groupId0 [waveform add -groups {{Slave 0}}]
 
 
 set groupId0 [waveform add -groups {{Slave 1}}]
-
-
-set groupId0 [waveform add -groups {{Slave 2}}]
-waveform format $groupId0 -namecolor #00ffff
 set gpGlist0 [waveform hierarchy contents $groupId0]
 set gpID0 [lindex $gpGlist0 0]
 foreach {name attrs} [subst  {
     {$dbNames(realName1)::[format {tb.slave_clk[1]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.resetn}]} {-color #00ffff -namecolor #00ffff}
     {$dbNames(realName1)::[format {tb.slave_req[1]}]} {-color #00ffff -namecolor #00ffff}
     {$dbNames(realName1)::[format {tb.slave_cmd[1]}]} {-color #00ffff -namecolor #00ffff}
     {$dbNames(realName1)::[format {tb.slave_addr[1]}]} {-color #00ffff -namecolor #00ffff}
@@ -393,6 +439,40 @@ foreach {name attrs} [subst  {
     {$dbNames(realName1)::[format {tb.slave_rdata[1]}]} {-color #00ffff -namecolor #00ffff}
 }] childcmds {
     {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+} {
+    set expected [ join [waveform signals -format fullpath $gpID0] ]
+    if {[string equal $name $expected] || $name == "cdivider"} {
+        if {$attrs != ""} {
+            eval waveform format $gpID0 $attrs
+        }
+        if { $childcmds != ""} {
+            eval $childcmds
+        }
+    }
+    set gpGlist0 [lrange $gpGlist0 1 end]
+    set gpID0 [lindex $gpGlist0 0]
+}
+waveform hierarchy collapse $groupId0
+
+
+set groupId0 [waveform add -groups {{Slave 2}}]
+set gpGlist0 [waveform hierarchy contents $groupId0]
+set gpID0 [lindex $gpGlist0 0]
+foreach {name attrs} [subst  {
+    {$dbNames(realName1)::[format {tb.slave_clk[2]}]} {-color #ffff00 -namecolor #ffff00}
+    {$dbNames(realName1)::[format {tb.slave_req[2]}]} {-color #ffff00 -namecolor #ffff00}
+    {$dbNames(realName1)::[format {tb.slave_cmd[2]}]} {-color #ffff00 -namecolor #ffff00}
+    {$dbNames(realName1)::[format {tb.slave_addr[2]}]} {-color #ffff00 -namecolor #ffff00}
+    {$dbNames(realName1)::[format {tb.slave_wdata[2]}]} {-color #ffff00 -namecolor #ffff00}
+    {$dbNames(realName1)::[format {tb.slave_ack[2]}]} {-color #ffff00 -namecolor #ffff00}
+    {$dbNames(realName1)::[format {tb.slave_rdata[2]}]} {-color #ffff00 -namecolor #ffff00}
+}] childcmds {
     {}
     {}
     {}
@@ -417,24 +497,17 @@ waveform hierarchy collapse $groupId0
 
 
 set groupId0 [waveform add -groups {{Slave 3}}]
-waveform hierarchy collapse $groupId0
-
-
-set groupId0 [waveform add -groups {{Slave 4}}]
-waveform format $groupId0 -namecolor #00ffff
 set gpGlist0 [waveform hierarchy contents $groupId0]
 set gpID0 [lindex $gpGlist0 0]
 foreach {name attrs} [subst  {
-    {$dbNames(realName1)::[format {tb.slave_clk[3]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.resetn}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.slave_req[3]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.slave_cmd[3]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.slave_addr[3]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.slave_wdata[3]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.slave_ack[3]}]} {-color #00ffff -namecolor #00ffff}
-    {$dbNames(realName1)::[format {tb.slave_rdata[3]}]} {-color #00ffff -namecolor #00ffff}
+    {$dbNames(realName1)::[format {tb.slave_clk[3]}]} {-color #ffffff -namecolor #ffffff}
+    {$dbNames(realName1)::[format {tb.slave_req[3]}]} {-color #ffffff -namecolor #ffffff}
+    {$dbNames(realName1)::[format {tb.slave_cmd[3]}]} {-color #ffffff -namecolor #ffffff}
+    {$dbNames(realName1)::[format {tb.slave_addr[3]}]} {-color #ffffff -namecolor #ffffff}
+    {$dbNames(realName1)::[format {tb.slave_wdata[3]}]} {-color #ffffff -namecolor #ffffff}
+    {$dbNames(realName1)::[format {tb.slave_ack[3]}]} {-color #ffffff -namecolor #ffffff}
+    {$dbNames(realName1)::[format {tb.slave_rdata[3]}]} {-color #ffffff -namecolor #ffffff}
 }] childcmds {
-    {}
     {}
     {}
     {}
@@ -464,7 +537,66 @@ set id [waveform add -signals [subst  {
 	{$dbNames(realName1)::[format {tb.resetn}]}
 	} ]]
 
-waveform xview limits 0 366249ps
+set groupId0 [waveform add -groups {{Device Slave 0 req}}]
+set gpGlist0 [waveform hierarchy contents $groupId0]
+set gpID0 [lindex $gpGlist0 0]
+foreach {name attrs} [subst  {
+    {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.req[0]}]} {-color #ffff00}
+    {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.req[1]}]} {-color #ffff00}
+    {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.req[2]}]} {-color #ffff00}
+    {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.req[3]}]} {-color #ffff00}
+}] childcmds {
+    {}
+    {}
+    {}
+    {}
+} {
+    set expected [ join [waveform signals -format fullpath $gpID0] ]
+    if {[string equal $name $expected] || $name == "cdivider"} {
+        if {$attrs != ""} {
+            eval waveform format $gpID0 $attrs
+        }
+        if { $childcmds != ""} {
+            eval $childcmds
+        }
+    }
+    set gpGlist0 [lrange $gpGlist0 1 end]
+    set gpID0 [lindex $gpGlist0 0]
+}
+
+
+set groupId0 [waveform add -groups {{Device Slave 0 grant}}]
+
+set groupId1 [waveform find -name {vip Slave 0}]
+
+set gpGlist0 [waveform hierarchy contents $groupId0]
+set gpID0 [lindex $gpGlist0 0]
+foreach {name attrs} [subst  {
+    {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.grant[0]}]} {-color #00ff99}
+    {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.grant[1]}]} {-color #00ff99}
+    {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.grant[2]}]} {-color #00ff99}
+    {$dbNames(realName1)::[format {tb.dut.slave_instance_gen[0].slv.grant[3]}]} {-color #00ff99}
+}] childcmds {
+    {}
+    {}
+    {}
+    {}
+} {
+    set expected [ join [waveform signals -format fullpath $gpID0] ]
+    if {[string equal $name $expected] || $name == "cdivider"} {
+        if {$attrs != ""} {
+            eval waveform format $gpID0 $attrs
+        }
+        if { $childcmds != ""} {
+            eval $childcmds
+        }
+    }
+    set gpGlist0 [lrange $gpGlist0 1 end]
+    set gpID0 [lindex $gpGlist0 0]
+}
+
+
+waveform xview limits 0 574970ps
 
 #
 # Waveform Window Links
@@ -474,7 +606,7 @@ waveform xview limits 0 366249ps
 # Console windows
 #
 console set -windowname Console
-window geometry Console 730x776+892+42
+window geometry Console 730x1120+1186+25
 
 #
 # Layout selection

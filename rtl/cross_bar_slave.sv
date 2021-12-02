@@ -36,9 +36,6 @@ module cross_bar_slave
 
 import cross_bar_pkg::*;
 
-// generate variable
-genvar i;
-
 //---------------------------------------------------------------------------------------------------------------
 // inner signals
 //---------------------------------------------------------------------------------------------------------------
@@ -50,7 +47,7 @@ logic [MASTER_N - 1: 0] grant;
 // saddr - one hot type's number of slave
 //---------------------------------------------------------------------------------------------------------------
 generate
-  for (i = 0; i < MASTER_N; i = i + 1) begin: req_gen
+  for (genvar i = 0; i < MASTER_N; i = i + 1) begin: req_gen
       assign req[i] = 
                   (master_req[i] && saddr == (1 << master_addr[i][ADDR_W - 1: ADDR_W - SLAVE_W])) ? 1'b1 : 1'b0;
   end
@@ -74,25 +71,25 @@ cross_bar_rr_arbiter arbiter (
 //---------------------------------------------------------------------------------------------------------------
 always_comb
 begin
-  slave_req   =         1'b0;
-  slave_addr  = {ADDR_W{1'b0}};
-  slave_cmd   =         1'b0;
-  slave_wdata = {DATA_W{1'b0}};
-  for (int unsigned index = 0; index < MASTER_N; index++)
-  begin
-      slave_req   |=         grant[index]   &   master_req[index];
-      slave_addr  |= {ADDR_W{grant[index]}} &  master_addr[index];
-      slave_cmd   |=         grant[index]   &   master_cmd[index];
-      slave_wdata |= {DATA_W{grant[index]}} & master_wdata[index];
-  end
+    slave_req   =         1'b0;
+    slave_addr  = {ADDR_W{1'b0}};
+    slave_cmd   =         1'b0;
+    slave_wdata = {DATA_W{1'b0}};
+    for (int unsigned index = 0; index < MASTER_N; index++)
+    begin
+        slave_req   |=         grant[index]   &   master_req[index];
+        slave_addr  |= {ADDR_W{grant[index]}} &  master_addr[index];
+        slave_cmd   |=         grant[index]   &   master_cmd[index];
+        slave_wdata |= {DATA_W{grant[index]}} & master_wdata[index];
+    end
 end
 
 //---------------------------------------------------------------------------------------------------------------
-// mgrant logic 
+// msgrant logic 
 // saddr - one hot type's number of slave
 //---------------------------------------------------------------------------------------------------------------
 generate
-  for (i = 0; i < MASTER_N; i = i + 1) begin: msgrant_gen
+  for (genvar i = 0; i < MASTER_N; i = i + 1) begin: msgrant_gen
       assign msgrant[i] = (grant[i]) ? saddr : {SLAVE_N{1'b0}};
   end
 endgenerate
