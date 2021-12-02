@@ -1,0 +1,5 @@
+#!/bin/bash
+
+genus -no_gui -files "elab.tcl syn.tcl"
+
+exit 0

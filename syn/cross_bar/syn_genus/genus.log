@@ -1,0 +1,1039 @@
+Cadence Genus(TM) Synthesis Solution.
+Copyright 2017 Cadence Design Systems, Inc. All rights reserved worldwide.
+Cadence and the Cadence logo are registered trademarks and Genus is a trademark
+of Cadence Design Systems, Inc. in the United States and other countries.
+
+Version: 16.24-s065_1, built Fri Aug 18 2017
+Options: -no_gui -files elab.tcl syn.tcl 
+Date:    Thu Dec 02 11:46:39 2021
+Host:    milano.otdel35.local (x86_64 w/Linux 2.6.32-754.31.1.el6.x86_64) (6cores*12cpus*Intel(R) Xeon(R) CPU E5645 @ 2.40GHz 12288KB) (12174396KB)
+OS:      Red Hat Enterprise Linux Workstation release 6.10 (Santiago)
+
+Checking out license: Genus_Synthesis
+
+Loading tool scripts...
+Finished loading tool scripts (10 seconds elapsed).
+
+Sourcing elab.tcl...
+  Setting attribute of root '/': 'information_level' = 3
+    Loading library mkcmos090rhbdstdPwcsV108T125C.lib
+
+  Message Summary for Library mkcmos090rhbdstdPwcsV108T125C.lib:
+  **************************************************************
+  Could not find an attribute in the library. [LBR-436]: 272
+  Missing a function attribute in the output pin definition. [LBR-518]: 21
+  **************************************************************
+ 
+Info    : Created nominal operating condition. [LBR-412]
+        : Operating condition '_nominal_' was created for the PVT values (1.000000, 1.080000, 125.000000) in library 'mkcmos090rhbdstdPwcsV108T125C.lib'.
+        : The nominal operating condition represents either the nominal PVT values if specified in the library source, or the default PVT values (1.0, 1.0, 1.0).
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'ANTENNANHVT' must have an output pin.
+        : Add the missing output pin(s), then reload the library. Otherwise, the library cell will be marked as unusable and as timing model.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'ANTENNANHVT' must have an output pin.
+Warning : Invalid pin name used. [LBR-146]
+        : Pin 'IIE' is used in output pin function, but does not exist in cell 'CBUFLHVTX12'
+Warning : Unusable clock gating integrated cell. [LBR-101]
+        : Clock gating integrated cell name: 'CBUFLHVTX12'
+        : To use the cell in clock gating, Set cell attribute 'dont_use' false in the library.
+Warning : Invalid pin name used. [LBR-146]
+        : Pin 'IIE' is used in output pin function, but does not exist in cell 'CBUFLHVTX4'
+Warning : Unusable clock gating integrated cell. [LBR-101]
+        : Clock gating integrated cell name: 'CBUFLHVTX4'
+Warning : Invalid pin name used. [LBR-146]
+        : Pin 'IIE' is used in output pin function, but does not exist in cell 'CBUFLHVTX8'
+Warning : Unusable clock gating integrated cell. [LBR-101]
+        : Clock gating integrated cell name: 'CBUFLHVTX8'
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL1' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL1' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL16' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL16' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL3' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL3' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL32' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL32' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL4' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL4' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL2' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL2' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL64' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL64' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL8' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'FILLERCELL8' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'CAPHVT2' must have an output pin.
+Warning : Library cell has no output pins defined. [LBR-9]
+        : Library cell 'CAPHVT2' must have an output pin.
+  Setting attribute of root '/': 'library' =  ../../lib/mkcmos090rhbdstdPwcsV108T125C.lib 
+  Setting attribute of root '/': 'lp_insert_clock_gating' = false
+  Library has 182 usable logic and 50 usable sequential lib-cells.
+Info    : Elaborating Design. [ELAB-1]
+        : Elaborating top-level block 'syn_wrp' from file '../syn_wrp.sv'.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cross_bar_top' from file '../../../rtl/cross_bar_top.sv'.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cross_bar_master' from file '../../../rtl/cross_bar_master.sv'.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cross_bar_slave' from file '../../../rtl/cross_bar_slave.sv'.
+Info    : Elaborating Subdesign. [ELAB-2]
+        : Elaborating block 'cross_bar_rr_arbiter' from file '../../../rtl/cross_bar_rr_arbiter.sv'.
+Info    : Done Elaborating Design. [ELAB-3]
+        : Done elaborating 'syn_wrp'.
+Info: Checking for source rtl...
+Info: Check completed for source rtl...
+UM:  flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:            10             11                                      elaborate
+Sourcing syn.tcl...
+Info    : Removed object. [TUI-58]
+        : Removed external_delay 'external_delay:syn_wrp/create_clock_delay_domain_1_clk_R_0'.
+Info    : Removed object. [TUI-58]
+        : Removed external_delay 'external_delay:syn_wrp/create_clock_delay_domain_1_clk_F_0'.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 32 hierarchical instances. 
+Following instances are deleted as they do not drive any primary output:
+'cbar/slave_instance_gen[0].slv/arbiter/mux_grant_135_7', 
+'cbar/slave_instance_gen[0].slv/arbiter/mux_lsync1_57_7', 
+'cbar/slave_instance_gen[0].slv/arbiter/mux_lsync2_64_7', 
+'cbar/slave_instance_gen[0].slv/arbiter/mux_rotate_ptr_81_7', 
+'cbar/slave_instance_gen[0].slv/arbiter/mux_rotate_ptr_95_13', 
+'cbar/slave_instance_gen[0].slv/arbiter/mux_rotate_ptr_95_51', 
+'cbar/slave_instance_gen[0].slv/arbiter/mux_rsync1_40_7', 
+'cbar/slave_instance_gen[0].slv/arbiter/mux_rsync2_47_7', 
+'cbar/slave_instance_gen[1].slv/arbiter/mux_grant_135_7', 
+'cbar/slave_instance_gen[1].slv/arbiter/mux_lsync1_57_7', 
+'cbar/slave_instance_gen[1].slv/arbiter/mux_lsync2_64_7', 
+'cbar/slave_instance_gen[1].slv/arbiter/mux_rotate_ptr_81_7', 
+'cbar/slave_instance_gen[1].slv/arbiter/mux_rotate_ptr_95_13', 
+'cbar/slave_instance_gen[1].slv/arbiter/mux_rotate_ptr_95_51', 
+'cbar/slave_instance_gen[1].slv/arbiter/mux_rsync1_40_7', 
+'cbar/slave_instance_gen[1].slv/arbiter/mux_rsync2_47_7', 
+'cbar/slave_instance_gen[2].slv/arbiter/mux_grant_135_7', 
+'cbar/slave_instance_gen[2].slv/arbiter/mux_lsync1_57_7', 
+'cbar/slave_instance_gen[2].slv/arbiter/mux_lsync2_64_7', 
+'cbar/slave_instance_gen[2].slv/arbiter/mux_rotate_ptr_81_7', 
+'cbar/slave_instance_gen[2].slv/arbiter/mux_rotate_ptr_95_13', 
+'cbar/slave_instance_gen[2].slv/arbiter/mux_rotate_ptr_95_51', 
+'cbar/slave_instance_gen[2].slv/arbiter/mux_rsync1_40_7', 
+'cbar/slave_instance_gen[2].slv/arbiter/mux_rsync2_47_7', 
+'cbar/slave_instance_gen[3].slv/arbiter/mux_grant_135_7', 
+'cbar/slave_instance_gen[3].slv/arbiter/mux_lsync1_57_7', 
+'cbar/slave_instance_gen[3].slv/arbiter/mux_lsync2_64_7', 
+'cbar/slave_instance_gen[3].slv/arbiter/mux_rotate_ptr_81_7', 
+'cbar/slave_instance_gen[3].slv/arbiter/mux_rotate_ptr_95_13', 
+'cbar/slave_instance_gen[3].slv/arbiter/mux_rotate_ptr_95_51', 
+'cbar/slave_instance_gen[3].slv/arbiter/mux_rsync1_40_7', 
+'cbar/slave_instance_gen[3].slv/arbiter/mux_rsync2_47_7'.
+        : Optimizations such as constant propagation or redundancy removal could change the connections so a hierarchical instance does not drive any primary outputs anymore. To see the list of deleted hierarchical instances, set the 'information_level' attribute to 2 or above. If message is truncated set message attribute 'truncate' to false to see the complete list. To prevent this optimization, set the 'delete_unloaded_insts' root/subdesign attribute to 'false' or 'preserve' instance attribute to 'true'.
+Info    : Synthesizing. [SYNTH-1]
+        : Synthesizing 'syn_wrp' to generic gates using 'medium' effort.
+Info    : Partition Based Synthesis execution skipped. [PHYS-752]
+        : Design size is less than the partition size '100000' for distributed generic optimization to kick in.
+Info    : Optimizing RTL. [RTLOPT-1]
+        : Optimizing RTL in 'syn_wrp' using 'medium' effort.
+Info    : Done optimizing RTL. [RTLOPT-2]
+        : Done optimizing RTL in 'syn_wrp'.
+      Removing temporary intermediate hierarchies under syn_wrp
+Info    : Replacing the synchronous part of an always feeding back flip-flop with a logic constant. [GLO-45]
+        : The instance is 'cbar/slave_instance_gen[0].slv/arbiter/grp_enabling_instsi/rotate_ptr_reg[3]'. The constant is '1'.
+        : To prevent this optimization, set 'optimize_constant_feedback_seqs' root attribute to 'false'. The instance attribute 'optimize_constant_feedback_seq' controls this optimization. 
+  Setting attribute of root '/': 'pbs_stage_start_elapsed_time' = 12
+  Setting attribute of root '/': 'pbs_stage_start_st_time' = 12
+Info    : Done synthesizing. [SYNTH-2]
+        : Done synthesizing 'syn_wrp' to generic gates.
+     flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:             2              2                                      syn_generic
+Info    : Mapping. [SYNTH-4]
+        : Mapping 'syn_wrp' using 'high' effort.
+Mapper: Libraries have:
+	domain _default_: 182 combo usable cells and 50 sequential usable cells
+Info    : Replacing a flip-flop with a logic constant 1. [GLO-13]
+        : The instance is 'cbar/slave_instance_gen[3].slv/arbiter/rotate_ptr_reg[3]'.
+        : To prevent this optimization, set the 'optimize_constant_1_flops' root attribute to 'false' or 'optimize_constant_1_seq' instance attribute to 'false'.
+Info    : Replacing a flip-flop with a logic constant 1. [GLO-13]
+        : The instance is 'cbar/slave_instance_gen[2].slv/arbiter/rotate_ptr_reg[3]'.
+Info    : Replacing a flip-flop with a logic constant 1. [GLO-13]
+        : The instance is 'cbar/slave_instance_gen[1].slv/arbiter/rotate_ptr_reg[3]'.
+Info    : Replacing a flip-flop with a logic constant 1. [GLO-13]
+        : The instance is 'cbar/slave_instance_gen[0].slv/arbiter/rotate_ptr_reg[3]'.
+Info    : Deleting sequential instances not driving any primary outputs. [GLO-32]
+        : Deleting 4 sequential instances. 
+Following instances are deleted as they do not drive any primary output:
+'cbar/slave_instance_gen[0].slv/arbiter/rotate_ptr_reg[3]', 
+'cbar/slave_instance_gen[1].slv/arbiter/rotate_ptr_reg[3]', 
+'cbar/slave_instance_gen[2].slv/arbiter/rotate_ptr_reg[3]', 
+'cbar/slave_instance_gen[3].slv/arbiter/rotate_ptr_reg[3]'.
+        : Optimizations such as constant propagation or redundancy removal could change the connections so an instance does not drive any primary outputs anymore. To see the list of deleted sequential, set the 'information_level' attribute to 2 or above. If message is truncated set message attribute 'truncate' to false to see the complete list.
+Info    : Partition Based Synthesis execution skipped. [PHYS-752]
+        : Design size is less than the partition size '100000' for distributed mapping optimization to kick in.
+Mapper: Libraries have:
+	domain _default_: 182 combo usable cells and 50 sequential usable cells
+      Mapping 'syn_wrp'...
+Multi-threaded constant propagation [1|0] ...
+Info    : Hierarchical instance automatically ungrouped. [GLO-51]
+        : Instance 'slave_instance_gen[0].slv' in module 'cross_bar_top' would be automatically ungrouped.
+        : Hierarchical instances can be automatically ungrouped to allow for better area or timing optimization. You can control auto ungrouping using the root-level attribute 'auto_ungroup'. You can skip individual instances or modules using the attribute 'ungroup_ok'.
+Info    : Hierarchical instance automatically ungrouped. [GLO-51]
+        : Instance 'slave_instance_gen[1].slv' in module 'cross_bar_top' would be automatically ungrouped.
+Info    : Hierarchical instance automatically ungrouped. [GLO-51]
+        : Instance 'slave_instance_gen[2].slv' in module 'cross_bar_top' would be automatically ungrouped.
+Info    : Hierarchical instance automatically ungrouped. [GLO-51]
+        : Instance 'slave_instance_gen[3].slv' in module 'cross_bar_top' would be automatically ungrouped.
+Info    : Hierarchical instance automatically ungrouped. [GLO-51]
+        : Instance 'slave_instance_gen[3].slv_arbiter' in module 'cross_bar_top' would be automatically ungrouped.
+Info    : Hierarchical instance automatically ungrouped. [GLO-51]
+        : Instance 'slave_instance_gen[2].slv_arbiter' in module 'cross_bar_top' would be automatically ungrouped.
+Info    : Hierarchical instance automatically ungrouped. [GLO-51]
+        : Instance 'slave_instance_gen[1].slv_arbiter' in module 'cross_bar_top' would be automatically ungrouped.
+Info    : Hierarchical instance automatically ungrouped. [GLO-51]
+        : Instance 'slave_instance_gen[0].slv_arbiter' in module 'cross_bar_top' would be automatically ungrouped.
+Info    : Hierarchical instance automatically ungrouped. [GLO-51]
+        : Instance 'master_instance_gen[3].mst' in module 'cross_bar_top' would be automatically ungrouped.
+Info    : Hierarchical instance automatically ungrouped. [GLO-51]
+        : Instance 'master_instance_gen[2].mst' in module 'cross_bar_top' would be automatically ungrouped.
+Info    : Hierarchical instance automatically ungrouped. [GLO-51]
+        : Instance 'master_instance_gen[1].mst' in module 'cross_bar_top' would be automatically ungrouped.
+Info    : Hierarchical instance automatically ungrouped. [GLO-51]
+        : Instance 'master_instance_gen[0].mst' in module 'cross_bar_top' would be automatically ungrouped.
+Multi-threaded Virtual Mapping    (8 threads per ST process, 8 of 12 CPUs usable)
+ 
+Global mapping target info
+==========================
+Cost Group 'clk' target slack:    60 ps
+Target path end-point (Pin: cbar/slave_instance_gen[0].slv_arbiter_grant_reg[2]/d)
+
+                           Pin                                        Type          Fanout Load Arrival   
+                                                                                           (fF)   (ps)    
+----------------------------------------------------------------------------------------------------------
+(clock clk)                                                 <<<  launch                               0 R 
+cbar
+  cb_seqi
+    slave_instance_gen[0].slv_arbiter_rotate_ptr_reg[2]/clk                                               
+    slave_instance_gen[0].slv_arbiter_rotate_ptr_reg[2]/q   (u)  unmapped_d_flop         1  6.8           
+    g4759/in_0                                                                                            
+    g4759/z                                                 (u)  unmapped_complex2       3 21.9           
+    g4723/in_1                                                                                            
+    g4723/z                                                 (u)  unmapped_nand2          1  6.8           
+    g4692/in_1                                                                                            
+    g4692/z                                                 (u)  unmapped_complex2       3 20.4           
+    g4687/in_1                                                                                            
+    g4687/z                                                 (u)  unmapped_or2            1  6.8           
+    g4670/in_1                                                                                            
+    g4670/z                                                 (u)  unmapped_nand2          1  7.3           
+    g4849/in_0                                                                                            
+    g4849/z                                                 (u)  unmapped_complex2       1  7.3           
+    g4851/data1                                                                                           
+    g4851/z                                                 (u)  unmapped_bmux3          1  7.3           
+    slave_instance_gen[0].slv_arbiter_grant_reg[2]/d        <<<  unmapped_d_flop                          
+    slave_instance_gen[0].slv_arbiter_grant_reg[2]/clk           setup                                    
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(clock clk)                                                      capture                           2500 R 
+                                                                 uncertainty                              
+----------------------------------------------------------------------------------------------------------
+Cost Group   : 'clk' (path_group 'clk')
+Start-point  : cbar/cb_seqi/slave_instance_gen[0].slv_arbiter_rotate_ptr_reg[2]/clk
+End-point    : cbar/cb_seqi/slave_instance_gen[0].slv_arbiter_grant_reg[2]/d
+
+(u) : Net has unmapped pin(s).
+
+The global mapper estimates a slack for this path of 974ps.
+ 
+Multi-threaded Technology Mapping (8 threads per ST process, 8 of 12 CPUs usable)
+ 
+Global mapping timing result
+============================
+                           Pin                                    Type       Fanout Load Slew Delay Arrival   
+                                                                                    (fF) (ps)  (ps)   (ps)    
+--------------------------------------------------------------------------------------------------------------
+(clock clk)                                                     launch                                    0 R 
+cbar
+  cb_seqi
+    slave_instance_gen[2].slv_arbiter_grant_reg[3]/CP                                       0             0 R 
+    slave_instance_gen[2].slv_arbiter_grant_reg[3]/Q            FD2QHVTX4        12 31.3  152  +467     467 F 
+    g5638/A                                                                                      +0     467   
+    g5638/Z                                                     OR2HVTX2          2  3.9   56  +269     736 F 
+    g5620/B                                                                                      +0     736   
+    g5620/Z                                                     OR2HVTX2          2  5.0   60  +200     936 F 
+    g5590/B                                                                                      +0     936   
+    g5590/Z                                                     NR2HVTX2          3  8.1  108   +93    1029 R 
+    slave_instance_gen[2].slv_arbiter_rotate_ptr_reg[0]/TE <<<  FD4TQHVTX1                       +0    1029   
+    slave_instance_gen[2].slv_arbiter_rotate_ptr_reg[0]/CP      setup                       0 +1017    2046 R 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(clock clk)                                                     capture                                2500 R 
+                                                                uncertainty                     -50    2450 R 
+--------------------------------------------------------------------------------------------------------------
+Cost Group   : 'clk' (path_group 'clk')
+Timing slack :     404ps 
+Start-point  : cbar/cb_seqi/slave_instance_gen[2].slv_arbiter_grant_reg[3]/CP
+End-point    : cbar/cb_seqi/slave_instance_gen[2].slv_arbiter_rotate_ptr_reg[0]/TE
+
+ 
+ 
+Global mapping status
+=====================
+                                   Group   
+                                  Tot Wrst 
+                           Total  Weighted 
+Operation                   Area   Slacks  
+-------------------------------------------------------------------------------
+ global_map                17387        0 
+
+    Cost Group            Target    Slack    Diff.    Clock
+-----------------------------------------------------------
+           clk                60      404              2500 
+
+ 
+Global incremental target info
+==============================
+Cost Group 'clk' target slack:    29 ps
+Target path end-point (Pin: cbar/slave_instance_gen[2].slv_arbiter_rotate_ptr_reg[2]/TE (FD4TQHVTX1/TE))
+
+                           Pin                                    Type       Fanout Load Arrival   
+                                                                                    (fF)   (ps)    
+---------------------------------------------------------------------------------------------------
+(clock clk)                                                <<<  launch                         0 R 
+cbar
+  cb_seqi
+    slave_instance_gen[2].slv_arbiter_grant_reg[3]/CP                                              
+    slave_instance_gen[2].slv_arbiter_grant_reg[3]/Q            FD2QHVTX4        12 31.3           
+    g5638/A                                                                                        
+    g5638/Z                                                     OR2HVTX2          2  3.9           
+    g5620/B                                                                                        
+    g5620/Z                                                     OR2HVTX2          2  5.0           
+    g5590/B                                                                                        
+    g5590/Z                                                     NR2HVTX2          3  8.1           
+    slave_instance_gen[2].slv_arbiter_rotate_ptr_reg[2]/TE <<<  FD4TQHVTX1                         
+    slave_instance_gen[2].slv_arbiter_rotate_ptr_reg[2]/CP      setup                              
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+(clock clk)                                                     capture                     2500 R 
+                                                                uncertainty                        
+---------------------------------------------------------------------------------------------------
+Cost Group   : 'clk' (path_group 'clk')
+Start-point  : cbar/cb_seqi/slave_instance_gen[2].slv_arbiter_grant_reg[3]/CP
+End-point    : cbar/cb_seqi/slave_instance_gen[2].slv_arbiter_rotate_ptr_reg[2]/TE
+
+The global mapper estimates a slack for this path of 283ps.
+ 
+ 
+Global incremental timing result
+================================
+                           Pin                                    Type       Fanout Load Slew Delay Arrival   
+                                                                                    (fF) (ps)  (ps)   (ps)    
+--------------------------------------------------------------------------------------------------------------
+(clock clk)                                                     launch                                    0 R 
+cbar
+  cb_seqi
+    slave_instance_gen[2].slv_arbiter_grant_reg[3]/CP                                       0             0 R 
+    slave_instance_gen[2].slv_arbiter_grant_reg[3]/Q            FD2QHVTX2        12 23.4  158  +408     408 F 
+    g5638/A                                                                                      +0     408   
+    g5638/Z                                                     OR2HVTX2          2  3.9   56  +272     681 F 
+    g5620/B                                                                                      +0     681   
+    g5620/Z                                                     OR2HVTX2          2  5.0   60  +200     881 F 
+    g5590/B                                                                                      +0     881   
+    g5590/Z                                                     NR2HVTX2          3  8.1  109   +93     974 R 
+    slave_instance_gen[2].slv_arbiter_rotate_ptr_reg[0]/TE <<<  FD4TQHVTX1                       +0     974   
+    slave_instance_gen[2].slv_arbiter_rotate_ptr_reg[0]/CP      setup                       0 +1017    1991 R 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+(clock clk)                                                     capture                                2500 R 
+                                                                uncertainty                     -50    2450 R 
+--------------------------------------------------------------------------------------------------------------
+Cost Group   : 'clk' (path_group 'clk')
+Timing slack :     459ps 
+Start-point  : cbar/cb_seqi/slave_instance_gen[2].slv_arbiter_grant_reg[3]/CP
+End-point    : cbar/cb_seqi/slave_instance_gen[2].slv_arbiter_rotate_ptr_reg[0]/TE
+
+ 
+ 
+Global incremental optimization status
+======================================
+                                   Group   
+                                  Tot Wrst 
+                           Total  Weighted 
+Operation                   Area   Slacks  
+-------------------------------------------------------------------------------
+ global_incr               16807        0 
+
+    Cost Group            Target    Slack    Diff.    Clock
+-----------------------------------------------------------
+           clk                29      459              2500 
+
+
+Scan mapping status report
+==========================
+    Scan mapping: converting flip-flops that pass TDRC.
+    Scan mapping: bypassed.  You have to either 1) set attribute 'dft_scan_map_mode' to 'tdrc_pass' and run 'check_dft_rules' or 2) set attribute 'dft_scan_map_mode' to 'force_all'.
+
+    Scan mapping bypassed because no TDRC data is available: either command 'check_dft_rules' has not been run or TDRC data has been subsequently invalidated.
+ Doing ConstProp on design:syn_wrp ... 
+
+ 
+Incremental optimization status
+===============================
+                                   Group   
+                                  Tot Wrst     Total - - DRC Totals - -
+                           Total  Weighted      Neg      Max       Max 
+Operation                   Area   Slacks      Slack    Trans      Cap 
+-------------------------------------------------------------------------------
+ init_delay                16807        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+       crit_upsz         0  (        0 /        0 )  0.00
+    plc_bal_star         0  (        0 /        0 )  0.00
+     drc_buftimb         0  (        0 /        0 )  0.00
+          plc_st         0  (        0 /        0 )  0.00
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+     drc_buftims         0  (        0 /        0 )  0.00
+            fopt         0  (        0 /        0 )  0.00
+       plc_lo_st         0  (        0 /        0 )  0.00
+
+ 
+Local TNS optimization status
+=============================
+                                   Group   
+                                  Tot Wrst     Total - - DRC Totals - -
+                           Total  Weighted      Neg      Max       Max 
+Operation                   Area   Slacks      Slack    Trans      Cap 
+-------------------------------------------------------------------------------
+ init_tns                  16807        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+    plc_bal_star         0  (        0 /        0 )  0.00
+     drc_buftimb         0  (        0 /        0 )  0.00
+     drc_buftims         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+       plc_lo_st         0  (        0 /        0 )  0.00
+            fopt         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+        setup_dn         0  (        0 /        0 )  0.00
+
+##>======== Cadence Confidential (Mapping-Logical) ========
+##>Main Thread Summary:
+##>--------------------------------------------------------
+##>STEP               Elapsed     Insts      Area    Memory
+##>--------------------------------------------------------
+##>M:Initial                0      4668     51208       173
+##>M:Launch ST              0         -         -         -
+##>M:Distributed            0         -         -         -
+##>M:Cleanup                0      1527     16807       197
+##>M:MBCI                   0      1527     16807       197
+##>M:Misc                  12
+##>--------------------------------------------------------
+##>Total Elapsed           12
+##>========================================================
+  Setting attribute of root '/': 'pbs_stage_start_elapsed_time' = 25
+  Setting attribute of root '/': 'pbs_stage_start_st_time' = 24
+Info    : Done mapping. [SYNTH-5]
+        : Done mapping 'syn_wrp'.
+     flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:            20             12           -0.0 ps          458.7 ps  syn_map
+Info    : Incrementally optimizing. [SYNTH-7]
+        : Incrementally optimizing 'syn_wrp' using 'high' effort.
+ 
+Incremental optimization status
+===============================
+                                   Group   
+                                  Tot Wrst     Total - - DRC Totals - -
+                           Total  Weighted      Neg      Max       Max 
+Operation                   Area   Slacks      Slack    Trans      Cap 
+-------------------------------------------------------------------------------
+ init_iopt                 16807        0         0         0        0
+ const_prop                16807        0         0         0        0
+ hi_fo_buf                 16807        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+       hi_fo_buf         0  (        0 /        0 )  0.00
+
+ 
+Incremental optimization status
+===============================
+                                   Group   
+                                  Tot Wrst     Total - - DRC Totals - -
+                           Total  Weighted      Neg      Max       Max 
+Operation                   Area   Slacks      Slack    Trans      Cap 
+-------------------------------------------------------------------------------
+ init_delay                16807        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+        crit_msz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+       crit_slew         0  (        0 /        0 )  0.00
+        setup_dn         0  (        0 /        0 )  0.00
+    plc_bal_star         0  (        0 /        0 )  0.00
+     drc_buftimb         0  (        0 /        0 )  0.00
+          plc_st         0  (        0 /        0 )  0.00
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+     drc_buftims         0  (        0 /        0 )  0.00
+       plc_lo_st         0  (        0 /        0 )  0.00
+            fopt         0  (        0 /        0 )  0.00
+       crit_swap         0  (        0 /        0 )  0.00
+       mux2_swap         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       load_swap         0  (        0 /        0 )  0.00
+            fopt         0  (        0 /        0 )  0.00
+        setup_dn         0  (        0 /        0 )  0.00
+       load_isol         0  (        0 /        0 )  0.00
+       load_isol         0  (        0 /        0 )  0.00
+        move_for         0  (        0 /        0 )  0.00
+        move_for         0  (        0 /        0 )  0.00
+          rem_bi         0  (        0 /        0 )  0.00
+         offload         0  (        0 /        0 )  0.00
+          rem_bi         0  (        0 /        0 )  0.00
+         offload         0  (        0 /        0 )  0.00
+           phase         0  (        0 /        0 )  0.00
+        in_phase         0  (        0 /        0 )  0.00
+       merge_bit         0  (        0 /        0 )  0.00
+     merge_idrvr         0  (        0 /        0 )  0.00
+     merge_iload         0  (        0 /        0 )  0.00
+    merge_idload         0  (        0 /        0 )  0.00
+      merge_drvr         0  (        0 /        0 )  0.00
+      merge_load         0  (        0 /        0 )  0.00
+          decomp         0  (        0 /        0 )  0.00
+        p_decomp         0  (        0 /        0 )  0.00
+        levelize         0  (        0 /        0 )  0.00
+        mb_split         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+      mux_retime         0  (        0 /        0 )  0.00
+         buf2inv         0  (        0 /        0 )  0.00
+             exp         0  (        0 /        0 )  0.00
+       gate_deco         0  (        0 /        0 )  0.00
+       gcomp_tim         0  (        0 /        0 )  0.00
+  inv_pair_2_buf         0  (        0 /        0 )  0.00
+
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+         crr_220         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_200         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_300         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_400         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_111         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_210         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_110         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_101         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_201         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_211         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+        crit_msz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+       crit_slew         0  (        0 /        0 )  0.00
+        setup_dn         0  (        0 /        0 )  0.00
+    plc_bal_star         0  (        0 /        0 )  0.00
+     drc_buftimb         0  (        0 /        0 )  0.00
+          plc_st         0  (        0 /        0 )  0.00
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+     drc_buftims         0  (        0 /        0 )  0.00
+       plc_lo_st         0  (        0 /        0 )  0.00
+            fopt         0  (        0 /        0 )  0.00
+       crit_swap         0  (        0 /        0 )  0.00
+       mux2_swap         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       load_swap         0  (        0 /        0 )  0.00
+            fopt         0  (        0 /        0 )  0.00
+        setup_dn         0  (        0 /        0 )  0.00
+       load_isol         0  (        0 /        0 )  0.00
+       load_isol         0  (        0 /        0 )  0.00
+        move_for         0  (        0 /        0 )  0.00
+        move_for         0  (        0 /        0 )  0.00
+          rem_bi         0  (        0 /        0 )  0.00
+         offload         0  (        0 /        0 )  0.00
+          rem_bi         0  (        0 /        0 )  0.00
+         offload         0  (        0 /        0 )  0.00
+       merge_bit         0  (        0 /        0 )  0.00
+     merge_idrvr         0  (        0 /        0 )  0.00
+     merge_iload         0  (        0 /        0 )  0.00
+    merge_idload         0  (        0 /        0 )  0.00
+      merge_drvr         0  (        0 /        0 )  0.00
+      merge_load         0  (        0 /        0 )  0.00
+           phase         0  (        0 /        0 )  0.00
+          decomp         0  (        0 /        0 )  0.00
+        p_decomp         0  (        0 /        0 )  0.00
+        levelize         0  (        0 /        0 )  0.00
+        mb_split         0  (        0 /        0 )  0.00
+        in_phase         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+      mux_retime         0  (        0 /        0 )  0.00
+         buf2inv         0  (        0 /        0 )  0.00
+             exp         0  (        0 /        0 )  0.00
+       gate_deco         0  (        0 /        0 )  0.00
+       gcomp_tim         0  (        0 /        0 )  0.00
+  inv_pair_2_buf         0  (        0 /        0 )  0.00
+ init_drc                  16807        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+        drc_bufs         0  (        0 /        0 )  0.00
+        drc_fopt         0  (        0 /        0 )  0.00
+        drc_bufb         0  (        0 /        0 )  0.00
+      simple_buf         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+       crit_slew         0  (        0 /        0 )  0.00
+
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+      drc_buf_sp         0  (        0 /        0 )  0.00
+        drc_bufs         0  (        0 /        0 )  0.00
+        drc_fopt         0  (        0 /        0 )  0.00
+        drc_bufb         0  (        0 /        0 )  0.00
+      simple_buf         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+      drc_buf_sp         0  (        0 /        0 )  0.00
+        drc_bufs         0  (        0 /        0 )  0.00
+        drc_fopt         0  (        0 /        0 )  0.00
+        drc_bufb         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+
+ init_tns                  16807        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+            fopt         0  (        0 /        0 )  0.00
+    plc_bal_star         0  (        0 /        0 )  0.00
+     drc_buftimb         0  (        0 /        0 )  0.00
+     drc_buftims         0  (        0 /        0 )  0.00
+        crit_msz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+       plc_lo_st         0  (        0 /        0 )  0.00
+       crit_swap         0  (        0 /        0 )  0.00
+       mux2_swap         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       load_swap         0  (        0 /        0 )  0.00
+            fopt         0  (        0 /        0 )  0.00
+        setup_dn         0  (        0 /        0 )  0.00
+       load_isol         0  (        0 /        0 )  0.00
+       load_isol         0  (        0 /        0 )  0.00
+        move_for         0  (        0 /        0 )  0.00
+        move_for         0  (        0 /        0 )  0.00
+          rem_bi         0  (        0 /        0 )  0.00
+         offload         0  (        0 /        0 )  0.00
+          rem_bi         0  (        0 /        0 )  0.00
+         offload         0  (        0 /        0 )  0.00
+       merge_bit         0  (        0 /        0 )  0.00
+     merge_idrvr         0  (        0 /        0 )  0.00
+     merge_iload         0  (        0 /        0 )  0.00
+    merge_idload         0  (        0 /        0 )  0.00
+      merge_drvr         0  (        0 /        0 )  0.00
+      merge_load         0  (        0 /        0 )  0.00
+           phase         0  (        0 /        0 )  0.00
+          decomp         0  (        0 /        0 )  0.00
+        p_decomp         0  (        0 /        0 )  0.00
+        levelize         0  (        0 /        0 )  0.00
+        mb_split         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+      mux_retime         0  (        0 /        0 )  0.00
+       crr_local         0  (        0 /        0 )  0.00
+         buf2inv         0  (        0 /        0 )  0.00
+
+ init_area                 16807        0         0         0        0
+ rem_buf                   16454        0         0         0        0
+ rem_inv                   16316        0         0         0        0
+ merge_bi                  16159        0         0         0        0
+ area_down                 16131        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+           undup         0  (        0 /        0 )  0.01
+         rem_buf        62  (       44 /       44 )  0.27
+         rem_inv        30  (       15 /       23 )  0.16
+        merge_bi        20  (       20 /       20 )  0.10
+      rem_inv_qb        24  (        0 /        0 )  0.00
+    seq_res_area         4  (        0 /        0 )  0.80
+        io_phase         1  (        0 /        0 )  0.00
+       gate_comp         4  (        0 /        0 )  0.17
+       gcomp_mog         0  (        0 /        0 )  0.03
+       glob_area         9  (        0 /        9 )  0.02
+       area_down         8  (        3 /        3 )  0.10
+  gate_deco_area         0  (        0 /        0 )  0.00
+         rem_buf         7  (        0 /        0 )  0.01
+         rem_inv         8  (        0 /        1 )  0.02
+        merge_bi         0  (        0 /        0 )  0.00
+      rem_inv_qb        24  (        0 /        0 )  0.00
+
+ 
+Incremental optimization status
+===============================
+                                   Group   
+                                  Tot Wrst     Total - - DRC Totals - -
+                           Total  Weighted      Neg      Max       Max 
+Operation                   Area   Slacks      Slack    Trans      Cap 
+-------------------------------------------------------------------------------
+ init_delay                16131        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+         crr_220         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_200         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_300         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_400         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_111         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_210         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_110         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_101         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_201         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+         crr_211         0  (        0 /        0 )  0.00
+        crr_glob         0  (        0 /        0 )  0.00
+        crit_msz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+       crit_slew         0  (        0 /        0 )  0.00
+        setup_dn         0  (        0 /        0 )  0.00
+    plc_bal_star         0  (        0 /        0 )  0.00
+     drc_buftimb         0  (        0 /        0 )  0.00
+          plc_st         0  (        0 /        0 )  0.00
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+     drc_buftims         0  (        0 /        0 )  0.00
+       plc_lo_st         0  (        0 /        0 )  0.00
+            fopt         0  (        0 /        0 )  0.00
+       crit_swap         0  (        0 /        0 )  0.00
+       mux2_swap         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       load_swap         0  (        0 /        0 )  0.00
+            fopt         0  (        0 /        0 )  0.00
+        setup_dn         0  (        0 /        0 )  0.00
+       load_isol         0  (        0 /        0 )  0.00
+       load_isol         0  (        0 /        0 )  0.00
+        move_for         0  (        0 /        0 )  0.00
+        move_for         0  (        0 /        0 )  0.00
+          rem_bi         0  (        0 /        0 )  0.00
+         offload         0  (        0 /        0 )  0.00
+          rem_bi         0  (        0 /        0 )  0.00
+         offload         0  (        0 /        0 )  0.00
+       merge_bit         0  (        0 /        0 )  0.00
+     merge_idrvr         0  (        0 /        0 )  0.00
+     merge_iload         0  (        0 /        0 )  0.00
+    merge_idload         0  (        0 /        0 )  0.00
+      merge_drvr         0  (        0 /        0 )  0.00
+      merge_load         0  (        0 /        0 )  0.00
+           phase         0  (        0 /        0 )  0.00
+          decomp         0  (        0 /        0 )  0.00
+        p_decomp         0  (        0 /        0 )  0.00
+        levelize         0  (        0 /        0 )  0.00
+        mb_split         0  (        0 /        0 )  0.00
+        in_phase         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+      mux_retime         0  (        0 /        0 )  0.00
+         buf2inv         0  (        0 /        0 )  0.00
+             exp         0  (        0 /        0 )  0.00
+       gate_deco         0  (        0 /        0 )  0.00
+       gcomp_tim         0  (        0 /        0 )  0.00
+  inv_pair_2_buf         0  (        0 /        0 )  0.00
+ init_drc                  16131        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+        drc_bufs         0  (        0 /        0 )  0.00
+        drc_fopt         0  (        0 /        0 )  0.00
+        drc_bufb         0  (        0 /        0 )  0.00
+      simple_buf         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+       crit_slew         0  (        0 /        0 )  0.00
+
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+        drc_bufs         0  (        0 /        0 )  0.00
+        drc_fopt         0  (        0 /        0 )  0.00
+        drc_bufb         0  (        0 /        0 )  0.00
+      simple_buf         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+        drc_bufs         0  (        0 /        0 )  0.00
+        drc_fopt         0  (        0 /        0 )  0.00
+        drc_bufb         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+
+ init_tns                  16131        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+            fopt         0  (        0 /        0 )  0.00
+    plc_bal_star         0  (        0 /        0 )  0.00
+     drc_buftimb         0  (        0 /        0 )  0.00
+     drc_buftims         0  (        0 /        0 )  0.00
+        crit_msz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+       plc_lo_st         0  (        0 /        0 )  0.00
+       crit_swap         0  (        0 /        0 )  0.00
+       mux2_swap         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       load_swap         0  (        0 /        0 )  0.00
+            fopt         0  (        0 /        0 )  0.00
+        setup_dn         0  (        0 /        0 )  0.00
+       load_isol         0  (        0 /        0 )  0.00
+       load_isol         0  (        0 /        0 )  0.00
+        move_for         0  (        0 /        0 )  0.00
+        move_for         0  (        0 /        0 )  0.00
+          rem_bi         0  (        0 /        0 )  0.00
+         offload         0  (        0 /        0 )  0.00
+          rem_bi         0  (        0 /        0 )  0.00
+         offload         0  (        0 /        0 )  0.00
+       merge_bit         0  (        0 /        0 )  0.00
+     merge_idrvr         0  (        0 /        0 )  0.00
+     merge_iload         0  (        0 /        0 )  0.00
+    merge_idload         0  (        0 /        0 )  0.00
+      merge_drvr         0  (        0 /        0 )  0.00
+      merge_load         0  (        0 /        0 )  0.00
+           phase         0  (        0 /        0 )  0.00
+          decomp         0  (        0 /        0 )  0.00
+        p_decomp         0  (        0 /        0 )  0.00
+        levelize         0  (        0 /        0 )  0.00
+        mb_split         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+      mux_retime         0  (        0 /        0 )  0.00
+       crr_local         0  (        0 /        0 )  0.00
+         buf2inv         0  (        0 /        0 )  0.00
+
+ init_area                 16131        0         0         0        0
+ area_down                 16122        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+           undup         0  (        0 /        0 )  0.01
+         rem_buf         7  (        0 /        0 )  0.01
+         rem_inv         8  (        0 /        1 )  0.02
+        merge_bi         0  (        0 /        0 )  0.00
+      rem_inv_qb        24  (        0 /        0 )  0.00
+        io_phase         1  (        0 /        0 )  0.00
+       gate_comp         4  (        0 /        0 )  0.17
+       gcomp_mog         0  (        0 /        0 )  0.03
+       glob_area         9  (        0 /        9 )  0.02
+       area_down         8  (        2 /        2 )  0.11
+  gate_deco_area         0  (        0 /        0 )  0.00
+
+ 
+Incremental optimization status
+===============================
+                                   Group   
+                                  Tot Wrst     Total - - DRC Totals - -
+                           Total  Weighted      Neg      Max       Max 
+Operation                   Area   Slacks      Slack    Trans      Cap 
+-------------------------------------------------------------------------------
+ init_delay                16122        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+        crit_msz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+       crit_slew         0  (        0 /        0 )  0.00
+        setup_dn         0  (        0 /        0 )  0.00
+    plc_bal_star         0  (        0 /        0 )  0.00
+     drc_buftimb         0  (        0 /        0 )  0.00
+          plc_st         0  (        0 /        0 )  0.00
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+     drc_buftims         0  (        0 /        0 )  0.00
+       plc_lo_st         0  (        0 /        0 )  0.00
+            fopt         0  (        0 /        0 )  0.00
+       crit_swap         0  (        0 /        0 )  0.00
+       mux2_swap         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       load_swap         0  (        0 /        0 )  0.00
+            fopt         0  (        0 /        0 )  0.00
+        setup_dn         0  (        0 /        0 )  0.00
+       load_isol         0  (        0 /        0 )  0.00
+       load_isol         0  (        0 /        0 )  0.00
+        move_for         0  (        0 /        0 )  0.00
+        move_for         0  (        0 /        0 )  0.00
+          rem_bi         0  (        0 /        0 )  0.00
+         offload         0  (        0 /        0 )  0.00
+          rem_bi         0  (        0 /        0 )  0.00
+         offload         0  (        0 /        0 )  0.00
+           phase         0  (        0 /        0 )  0.00
+        in_phase         0  (        0 /        0 )  0.00
+       merge_bit         0  (        0 /        0 )  0.00
+     merge_idrvr         0  (        0 /        0 )  0.00
+     merge_iload         0  (        0 /        0 )  0.00
+    merge_idload         0  (        0 /        0 )  0.00
+      merge_drvr         0  (        0 /        0 )  0.00
+      merge_load         0  (        0 /        0 )  0.00
+          decomp         0  (        0 /        0 )  0.00
+        p_decomp         0  (        0 /        0 )  0.00
+        levelize         0  (        0 /        0 )  0.00
+        mb_split         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+      mux_retime         0  (        0 /        0 )  0.00
+         buf2inv         0  (        0 /        0 )  0.00
+             exp         0  (        0 /        0 )  0.00
+       gate_deco         0  (        0 /        0 )  0.00
+       gcomp_tim         0  (        0 /        0 )  0.00
+  inv_pair_2_buf         0  (        0 /        0 )  0.00
+
+ init_drc                  16122        0         0         0        0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+        drc_bufs         0  (        0 /        0 )  0.00
+        drc_fopt         0  (        0 /        0 )  0.00
+        drc_bufb         0  (        0 /        0 )  0.00
+      simple_buf         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+       crit_slew         0  (        0 /        0 )  0.00
+
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+        drc_bufs         0  (        0 /        0 )  0.00
+        drc_fopt         0  (        0 /        0 )  0.00
+        drc_bufb         0  (        0 /        0 )  0.00
+      simple_buf         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+          plc_st         0  (        0 /        0 )  0.00
+        plc_star         0  (        0 /        0 )  0.00
+        drc_bufs         0  (        0 /        0 )  0.00
+        drc_fopt         0  (        0 /        0 )  0.00
+        drc_bufb         0  (        0 /        0 )  0.00
+             dup         0  (        0 /        0 )  0.00
+       crit_dnsz         0  (        0 /        0 )  0.00
+       crit_upsz         0  (        0 /        0 )  0.00
+
+Info    : Done incrementally optimizing. [SYNTH-8]
+        : Done incrementally optimizing 'syn_wrp'.
+     flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:             2              3           -0.0 ps            6.2 ps  syn_opt
+============================================================
+  Generated by:           Genus(TM) Synthesis Solution 16.24-s065_1
+  Generated on:           Dec 02 2021  11:47:07 am
+  Module:                 syn_wrp
+  Technology library:     mkcmos090rhbdstdPwcsV108T125C 1.0
+  Operating conditions:   PVT_1P08V_125C (balanced_tree)
+  Wireload mode:          enclosed
+  Area mode:              timing library
+============================================================
+
+Instance     Module     Cells  Cell Area  Net Area   Total Area  Wireload     
+------------------------------------------------------------------------------
+syn_wrp                  1445      16122         0        16122    <none> (D) 
+  cbar   cross_bar_top   1445      16122         0        16122    <none> (D) 
+
+ (D) = wireload is default in technology library
+Warning : Possible timing problems have been detected in this design. [TIM-11]
+        : The design is 'syn_wrp'.
+        : Use 'report timing -lint' for more information.
+============================================================
+  Generated by:           Genus(TM) Synthesis Solution 16.24-s065_1
+  Generated on:           Dec 02 2021  11:47:07 am
+  Module:                 syn_wrp
+  Wireload mode:          enclosed
+  Area mode:              timing library
+============================================================
+
+
+Path 1: MET (6 ps) Setup Check with Pin cbar/slave_instance_gen[1].slv_arbiter_rotate_ptr_reg[2]/CP->TE
+          Group: clk
+     Startpoint: (R) cbar/slave_instance_gen[1].slv_arbiter_grant_reg[1]/CP
+          Clock: (R) clk
+       Endpoint: (R) cbar/slave_instance_gen[1].slv_arbiter_rotate_ptr_reg[2]/TE
+          Clock: (R) clk
+
+                     Capture       Launch     
+        Clock Edge:+    2500            0     
+       Src Latency:+       0            0     
+       Net Latency:+       0 (I)        0 (I) 
+           Arrival:=    2500            0     
+                                              
+             Setup:-    1048                  
+       Uncertainty:-      50                  
+     Required Time:=    1402                  
+      Launch Clock:-       0                  
+         Data Path:-    1396                  
+             Slack:=       6                  
+
+#-----------------------------------------------------------------------------------------------------------------------------
+#                        Timing Point                         Flags   Arc   Edge    Cell     Fanout  Load Trans Delay Arrival 
+#                                                                                                    (fF)  (ps)  (ps)   (ps)  
+#-----------------------------------------------------------------------------------------------------------------------------
+  cbar/slave_instance_gen[1].slv_arbiter_grant_reg[1]/CP      -       -     R     (arrival)      68     -     0     -       0 
+  cbar/slave_instance_gen[1].slv_arbiter_grant_reg[1]/Q       -       CP->Q F     FD2QHVTX4      87 257.0   568   815     815 
+  cbar/g5603/Z                                                -       A->Z  F     OR2HVTX2        2   5.0    67   484    1299 
+  cbar/g5591/Z                                                -       B->Z  R     NR2HVTX2        3   8.1   168    96    1396 
+  cbar/slave_instance_gen[1].slv_arbiter_rotate_ptr_reg[2]/TE <<<     -     R     FD4TQHVTX1      3     -     -     0    1396 
+#-----------------------------------------------------------------------------------------------------------------------------
+
+WARNING: This version of the tool is 1567 days old.
+genus@root:> exit
+Normal exit.
