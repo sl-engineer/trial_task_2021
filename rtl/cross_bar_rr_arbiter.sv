@@ -33,14 +33,21 @@ logic [MASTER_N - 1: 0] nomask_grant;
 logic                   update_ptr;
 
 //---------------------------------------------------------------------------------------------------------------
-// sync and roll logic
+// sync and fall edge impulse logic
 //---------------------------------------------------------------------------------------------------------------
+logic [MASTER_N - 1: 0] rsync0;
+always_ff @(posedge clk or negedge aresetn)
+  if (!aresetn)
+      rsync0 <= {MASTER_N{1'b0}};
+  else
+      rsync0 <= req;
+
 logic [MASTER_N - 1: 0] rsync1;
 always_ff @(posedge clk or negedge aresetn)
   if (!aresetn)
       rsync1 <= {MASTER_N{1'b0}};
   else
-      rsync1 <= req;
+      rsync1 <= rsync0;
 
 logic [MASTER_N - 1: 0] rsync2;
 always_ff @(posedge clk or negedge aresetn)
@@ -52,12 +59,22 @@ always_ff @(posedge clk or negedge aresetn)
 logic [MASTER_N - 1: 0] rsync;     
 assign rsync = ~rsync1 & rsync2;              // set impulse when req[x] = 1 => to req[x] = 0
 
+//---------------------------------------------------------------------------------------------------------------
+// sync and rise edge impulse logic
+//---------------------------------------------------------------------------------------------------------------
+logic lsync0;
+always_ff @(posedge clk or negedge aresetn)
+  if (!aresetn)
+      lsync0 <= 1'b0;
+  else
+      lsync0 <= |req;
+
 logic lsync1;
 always_ff @(posedge clk or negedge aresetn)
   if (!aresetn)
       lsync1 <= 1'b0;
   else
-      lsync1 <= |req;
+      lsync1 <= lsync0;
 
 logic lsync2;      
 always_ff @(posedge clk or negedge aresetn)
@@ -69,6 +86,9 @@ always_ff @(posedge clk or negedge aresetn)
 logic  lsync;              
 assign lsync = lsync1 & ~lsync2;              // set impulse when |req = 0 -> to |req = 1
 
+//---------------------------------------------------------------------------------------------------------------
+// roll logic
+//---------------------------------------------------------------------------------------------------------------
 logic  roll; 
 assign roll = |rsync | lsync;
 
