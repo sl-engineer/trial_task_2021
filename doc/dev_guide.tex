@@ -1,0 +1,186 @@
+\documentclass[a4paper, 10pt]{article}
+
+\input{preamble}
+
+
+\author{Вячеслав Тарасов}
+\title{ Trial cross-bar controller\\
+        Device guide}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+\tableofcontents
+\pagestyle{myheadings}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{30pt}
+\renewcommand{\headrulewidth}{4pt}
+\renewcommand{\footrulewidth}{2pt}
+\fancyhead[R]{\leftmark}
+\fancyfoot[C]{\thepage}
+
+\newpage
+\section{Рабочее окружение}
+
+Описание всех основных директорий рабочего окружения.
+
+\subsection{doc}
+
+Директория с исходниками документации.
+\begin{itemize}
+ \item \textbf{dev\_guide.tex} - руководство разработчика в \LaTeX версии;
+ \item \textbf{preamble.tex} - преамбула для \LaTeX окружения;
+ \item \textbf{dev\_guide.pdf} - руководство разработчика, сохраненное в PDF формате.
+\end{itemize}
+
+\subsection{rtl}
+
+Директория с исходниками cross-bar контроллера.
+\begin{itemize}
+ \item \textbf{cross\_bar\_pkg.sv} - пакет со всеми ключевыми параметрами дизайна;
+ \item \textbf{cross\_bar\_top.sv} - модуль верхнего уровня контроллера;
+ \item \textbf{cross\_bar\_master.sv} - модуль мультиплексоров для сигналов из slave в master;
+ \item \textbf{cross\_bar\_slave.sv} - модуль мультиплексоров для сигналов из master в slave c арбитражной логикой;
+ \item \textbf{cross\_bar\_arbiter.sv} - модуль арбитера.
+\end{itemize}
+
+
+\subsection{sim}
+
+Содержит скрипты для запуска симуляции в Xcelium.
+\begin{itemize}
+ \item \textbf{src.files} - файл со списком всех исходников для симуляции.
+\end{itemize}
+
+\subsection{syn}
+
+Директория со скриптами запуска синтеза в Genus. Используется для оценки временных/пространственных параметров блоков.
+\begin{itemize}
+ \item \textbf{lib} - директория с библиотеками.
+\end{itemize}
+
+Директория \textbf{cross\_bar} построена по принципу:
+\begin{itemize}
+ \item \textbf{syn\_genus/run\_genus} - скрипт для запуска Genus, в который передаются Tcl скрипты, описанные ниже;
+ \item \textbf{syn\_genus/elab.tcl} - скрипт с командами подключения библиотек, исходников и сборки;
+ \item \textbf{syn\_genus/syn.tcl} - скрипт с командами ограничений для тактового сигнала и синтеза;
+ \item \textbf{syn\_genus/clean} - скрипт для очистки всех артефактов синтеза;
+ \item \textbf{syn\_wrp.sv} - файл обертка для синтезируемого модуля;
+\end{itemize}
+
+
+\subsection{tb}
+
+Директория с тестбенчами.
+\begin{itemize}
+ \item \textbf{dev} - рабочий тестбенч; используется при разработке контроллера;
+ \item \textbf{rr\_arbiter} - тестбенч для тестирования арбитра;
+ \item \textbf{tb\_vip\_slave.sv} - отдельный файл, в который вынесен модуль Verification IP инфраструктуры.
+\end{itemize}
+
+\newpage{}
+\section{Архитектура}
+
+Cross-bar controller позволяет осуществлять коммутацию нескольких master и нескольких slave устройств.
+Параметры контроллера:
+\begin{itemize}
+ \item Количество master устройств (parameter \textbf{MASTER\_N}), не менее 2-х;
+ \item Количество slave устройств (parameter \textbf{SLAVE\_N});
+ \item Ширина шины адреса (parameter \textbf{ADDR\_W});
+ \item Ширина шины данных (parameter \textbf{DATA\_W});
+ \item Выбор slave устройства определяется старшими битами адреса;
+ \item Арбитраж между несколькими master запросами в одно slave устройство осуществляется по дисциплине "round-robin".
+\end{itemize}
+
+
+\subsection{Описание портов}
+
+\begin{table}[h!]
+ \caption{Тактирование и сброс}
+ \centering
+  \begin{tabular}{lll}
+   \hline
+   Сигнал & Направление & Примечание\\
+   \hline 
+   clk     & вход & тактовый сигнал\\
+   aresetn & вход & асинхронный сброс с активным нулем\\
+   \hline 
+  \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+ \caption{Интерфейс к master устройствам}
+ \centering
+  \begin{tabular}{lll}
+   \hline
+   Сигнал & Направление & Примечание\\
+   \hline 
+   master\_req                   & вход  & запрос на выполнение транзакции\\
+   master\_addr[ADDR\_W - 1: 0]  & вход  & содержит адрес запроса\\
+   master\_cmd                   & вход  & признак операции: 0 - read, 1 – write\\
+   master\_wdata[DATA\_W - 1: 0] & вход  & содержит записываемые данные\\
+   master\_ack                   & выход & сигнал-подтверждение от slave устройства\\
+   master\_rdata[DATA\_W - 1: 0] & выход & содержит считываемые данные\\
+   \hline 
+  \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+ \caption{Интерфейс к slave устройствам}
+ \centering
+  \begin{tabular}{lll}
+   \hline
+   Сигнал & Направление & Примечание\\
+   \hline 
+   slave\_req                   & выход & запрос на выполнение транзакции\\
+   slave\_addr[ADDR\_W - 1: 0]  & выход & содержит адрес запроса\\
+   slave\_cmd                   & выход & признак операции: 0 - read, 1 – write\\
+   slave\_wdata[DATA\_W - 1: 0] & выход & содержит записываемые данные\\
+   slave\_ack                   & вход  & сигнал-подтверждение от slave устройства\\
+   slave\_rdata[DATA\_W - 1: 0] & вход  & содержит считываемые данные\\
+   \hline 
+  \end{tabular}
+\end{table}
+
+\subsection{Тактирование и сброс}
+
+\begin{itemize}
+ \item Разделения на тактовые домены внутри нет; 
+ \item Для всех триггеров внутри контроллера используется асинхронный сброс с активным нулём.
+\end{itemize}
+
+\subsection{Описание модулей}
+
+\subsubsection{cross\_bar\_top}
+Модуль верхнего уровня контроллера. Здесь происходит подключение всех основных модулей.
+Все параметры задаются через пакет cross\_bar\_pkg.
+
+\subsubsection{cross\_bar\_pkg}
+Пакет со всеми глобальными для дизайна параметрами, типами и пр. Этот пакет импортируется во все модули контроллера.
+
+\subsubsection{cross\_bar\_master}
+Чистая комбинационная логика мультиплексоров сигналов ack и rdata от slave к master.
+
+\subsubsection{cross\_bar\_slave}
+Модуль содержит в себе комбинационную логику мультиплексоров сигналов req, addr, cmd и wdata от master к slave, фильтр запросов req и модуль арбитража.
+
+\subsubsection{cross\_bar\_rr\_arbiter}
+Модуль арбитра, переписанный из открытых источников, требует дополнительной проверки.
+Также присутствует логика синхронизации сигналов req.
+
+\newpage{}
+\section{Функционирование}
+Полностью параметризованный модуль cross-bar, позволяющий производить автоматическую коммутацию настраиваемого количества master устройств и slave устройств.
+
+Выбор slave устройства определяется старшими битами сигналов addr.
+
+В случае одновременного обращения нескольких master устройств к одному slave устройству осуществляется арбитраж по дисциплине ``round-robin``.
+
+
+
+\end{document}
